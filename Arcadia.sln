@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcadiaEngine", "ArcadiaEngine\ArcadiaEngine.csproj", "{703B4255-33D0-438C-9B08-4B7101BA08A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcadiaDesktop", "ArcadiaDesktop\ArcadiaDesktop.csproj", "{CDAB0C67-DA22-4DC8-8363-00E6963F7E34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcadiaCli", "ArcadiaCli\ArcadiaCli.csproj", "{8766E5D3-F7BA-408B-9058-0C211E37E429}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateCheckerClient", "UpdateCheckerClient\UpdateCheckerClient.csproj", "{D4827C27-417D-461B-A004-BBEFBDB55061}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateCheckerServer", "UpdateCheckerServer\UpdateCheckerServer.csproj", "{6ABEE6C6-1951-47E8-B0AD-FF8706AAB98D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateCheckerCommon", "UpdateCheckerCommon\UpdateCheckerCommon.csproj", "{208EEEF0-AF7C-4CBD-A5A0-0CA935D9FA8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{703B4255-33D0-438C-9B08-4B7101BA08A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{703B4255-33D0-438C-9B08-4B7101BA08A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{703B4255-33D0-438C-9B08-4B7101BA08A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{703B4255-33D0-438C-9B08-4B7101BA08A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDAB0C67-DA22-4DC8-8363-00E6963F7E34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDAB0C67-DA22-4DC8-8363-00E6963F7E34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDAB0C67-DA22-4DC8-8363-00E6963F7E34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDAB0C67-DA22-4DC8-8363-00E6963F7E34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8766E5D3-F7BA-408B-9058-0C211E37E429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8766E5D3-F7BA-408B-9058-0C211E37E429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8766E5D3-F7BA-408B-9058-0C211E37E429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8766E5D3-F7BA-408B-9058-0C211E37E429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4827C27-417D-461B-A004-BBEFBDB55061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4827C27-417D-461B-A004-BBEFBDB55061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4827C27-417D-461B-A004-BBEFBDB55061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4827C27-417D-461B-A004-BBEFBDB55061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ABEE6C6-1951-47E8-B0AD-FF8706AAB98D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ABEE6C6-1951-47E8-B0AD-FF8706AAB98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ABEE6C6-1951-47E8-B0AD-FF8706AAB98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ABEE6C6-1951-47E8-B0AD-FF8706AAB98D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{208EEEF0-AF7C-4CBD-A5A0-0CA935D9FA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{208EEEF0-AF7C-4CBD-A5A0-0CA935D9FA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{208EEEF0-AF7C-4CBD-A5A0-0CA935D9FA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{208EEEF0-AF7C-4CBD-A5A0-0CA935D9FA8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

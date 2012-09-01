@@ -1,0 +1,8 @@
+﻿<Window x:Class="SomewhatGeeky.Arcadia.Desktop.TextOutputWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="TextOutputWindow" Height="375" Width="500" WindowStartupLocation="CenterOwner" KeyDown="Window_KeyDown">
+    <Grid>
+        <TextBox Name="textBox" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+    </Grid>
+</Window>

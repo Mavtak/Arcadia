@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DefaultSettings" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;arcadiaLibrary&gt;&lt;platformCollection&gt;&lt;commonFileExtensions&gt;&lt;extension&gt;zip&lt;/extension&gt;&lt;extension&gt;bin&lt;/extension&gt;&lt;/commonFileExtensions&gt;&lt;platform name="3DO Interactive Multiplayer" id="23"&gt;&lt;otherNames&gt;&lt;name&gt;3DO&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Amiga" id="39" /&gt;&lt;platform name="Amiga CD32" id="46" /&gt;&lt;platform name="Atari 2600" id="2"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;a26&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;2600&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Atari 5200" id="9"&gt;&lt;otherNames&gt;&lt;name&gt;5200&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Atari 7800" id="45"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;a78&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;7800&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Atari Jaguar" id="48"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;j64&lt;/extension&gt;&lt;extension&gt;jag&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Jaguar&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Atari Lynx" id="7"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;lnx&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Lynx&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Capcom Play System 1" id="44"&gt;&lt;otherNames&gt;&lt;name&gt;Capcom Play System 1&lt;/name&gt;&lt;name&gt;CPS 1&lt;/name&gt;&lt;name&gt;CPS1&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Capcom Play System 2" id="4"&gt;&lt;otherNames&gt;&lt;name&gt;Capcom Play System 2&lt;/name&gt;&lt;name&gt;CPS 2&lt;/name&gt;&lt;name&gt;CPS2&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Capcom Play System 3" id="21"&gt;&lt;otherNames&gt;&lt;name&gt;Capcom Play System 3&lt;/name&gt;&lt;name&gt;CPS 3&lt;/name&gt;&lt;name&gt;CPS3&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="ColecoVision" id="36"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;col&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Coleco Vision&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Compact Disc Interactive" id="20"&gt;&lt;otherNames&gt;&lt;name&gt;CDi&lt;/name&gt;&lt;name&gt;CD-i&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Famicom Disk System" id="27"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;fds&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Nintendo Famicom Disk System&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Game &amp;amp; Watch" id="38"&gt;&lt;otherNames&gt;&lt;name&gt;Nintendo Game &amp;amp; Watch&lt;/name&gt;&lt;name&gt;Game and Watch&lt;/name&gt;&lt;name&gt;Nintendo Game and Watch&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Game Boy" id="47"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;gb&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Gameboy&lt;/name&gt;&lt;name&gt;GB&lt;/name&gt;&lt;name&gt;Nintendo Gameboy&lt;/name&gt;&lt;name&gt;Nintendo Game Boy&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Game Boy Advance" id="22"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;gba&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Gameboy Advance&lt;/name&gt;&lt;name&gt;gba&lt;/name&gt;&lt;name&gt;Game Boy Advanced&lt;/name&gt;&lt;name&gt;Gameboy Advanced&lt;/name&gt;&lt;name&gt;Nintendo Game Boy Advance&lt;/name&gt;&lt;name&gt;Nintendo Game Boy Advanced&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Game Boy Color" id="41"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;gbc&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Gameboy Color&lt;/name&gt;&lt;name&gt;GBC&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Game Gear" id="37"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;gg&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;GG&lt;/name&gt;&lt;name&gt;GameGear&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="GameCube" id="11"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;gcm&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Game Cube&lt;/name&gt;&lt;name&gt;Nintendo GameCube&lt;/name&gt;&lt;name&gt;Nintendo Game Cube&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Hyper Neo Geo 64" id="28" /&gt;&lt;platform name="Magnavox Odyssey" id="18"&gt;&lt;otherNames&gt;&lt;name&gt;Odyssey&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Magnavox Odyssey²" id="33"&gt;&lt;otherNames&gt;&lt;name&gt;Magnavox Odyssey 2&lt;/name&gt;&lt;name&gt;Odyssey²&lt;/name&gt;&lt;name&gt;Odyssey 2&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Neo Geo" id="13" /&gt;&lt;platform name="Neo Geo CD" id="24" /&gt;&lt;platform name="Neo Geo Pocket" id="42" /&gt;&lt;platform name="Neo Geo Pocket Color" id="43"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;ngc&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;/platform&gt;&lt;platform name="N-Gage" id="3"&gt;&lt;otherNames&gt;&lt;name&gt;NGage&lt;/name&gt;&lt;name&gt;N Gage&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Nintendo" id="19"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;nes&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;NES&lt;/name&gt;&lt;name&gt;Nintendo Entertainment System&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Nintendo 64" id="31"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;eur&lt;/extension&gt;&lt;extension&gt;jap&lt;/extension&gt;&lt;extension&gt;n64&lt;/extension&gt;&lt;extension&gt;pal&lt;/extension&gt;&lt;extension&gt;u64&lt;/extension&gt;&lt;extension&gt;usa&lt;/extension&gt;&lt;extension&gt;v64&lt;/extension&gt;&lt;extension&gt;z64&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;N64&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Nintendo DS" id="1"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;nds&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;DS&lt;/name&gt;&lt;name&gt;NDS&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Pokemon Mini" id="29"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;min&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;/platform&gt;&lt;platform name="Sega CD" id="40"&gt;&lt;otherNames&gt;&lt;name&gt;Sega Mega-CD&lt;/name&gt;&lt;name&gt;Sega Mega CD&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Sega Dreamcast" id="12"&gt;&lt;otherNames&gt;&lt;name&gt;Dreamcast&lt;/name&gt;&lt;name&gt;Sega Dream Cast&lt;/name&gt;&lt;name&gt;Dream Cast&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Sega Genesis" id="8"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;gen&lt;/extension&gt;&lt;extension&gt;smd&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Sega Megadrive&lt;/name&gt;&lt;name&gt;Sega Mega Drive&lt;/name&gt;&lt;name&gt;Megadrive&lt;/name&gt;&lt;name&gt;Mega Drive&lt;/name&gt;&lt;name&gt;SG&lt;/name&gt;&lt;name&gt;Genesis&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Sega Master System" id="17"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;sms&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;SMS&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Sega Saturn" id="35"&gt;&lt;otherNames&gt;&lt;name&gt;Saturn&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Sony PlayStation" id="14"&gt;&lt;otherNames&gt;&lt;name&gt;PS1&lt;/name&gt;&lt;name&gt;Play Station&lt;/name&gt;&lt;name&gt;Sony PlayStation&lt;/name&gt;&lt;name&gt;PSX&lt;/name&gt;&lt;name&gt;Sony PlayStation 1&lt;/name&gt;&lt;name&gt;Sony Play Station 1&lt;/name&gt;&lt;name&gt;Play Station 1&lt;/name&gt;&lt;name&gt;PlayStation 1&lt;/name&gt;&lt;name&gt;Sony Play Station&lt;/name&gt;&lt;name&gt;Sony Play Station 1&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Sony PlayStation 2" id="16"&gt;&lt;otherNames&gt;&lt;name&gt;PS2&lt;/name&gt;&lt;name&gt;Play Station 2&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Super Nintendo" id="15"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;780&lt;/extension&gt;&lt;extension&gt;fig&lt;/extension&gt;&lt;extension&gt;smc&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;SNES&lt;/name&gt;&lt;name&gt;Super Nintendo Entertainment System&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="SuperGrafx" id="5"&gt;&lt;otherNames&gt;&lt;name&gt;Super Grafx&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="TurboGrafx-16" id="10"&gt;&lt;otherNames&gt;&lt;name&gt;TurboGrafx 16&lt;/name&gt;&lt;name&gt;Turbo Grafx-16&lt;/name&gt;&lt;name&gt;Turbo Grafx 16&lt;/name&gt;&lt;name&gt;TurboGrafx&lt;/name&gt;&lt;name&gt;Turbo Grafx&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Vectrex" id="30"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;vec&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;/platform&gt;&lt;platform name="VIC-20" id="6"&gt;&lt;otherNames&gt;&lt;name&gt;VC-20&lt;/name&gt;&lt;name&gt;VIC-1001&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="VirtualBoy" id="26"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;vb&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Nintendo VirtualBoy&lt;/name&gt;&lt;name&gt;Virtual Boy&lt;/name&gt;&lt;name&gt;Nintendo Virtual Boy&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="WonderSwan" id="25"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;ws&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Wonder Swan&lt;/name&gt;&lt;name&gt;Bandai WonderSwan&lt;/name&gt;&lt;name&gt;Bandai Wonder Swan&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="WonderSwan Color" id="34"&gt;&lt;uniqueFileExtensions&gt;&lt;extension&gt;wsc&lt;/extension&gt;&lt;/uniqueFileExtensions&gt;&lt;otherNames&gt;&lt;name&gt;Wonder Swan Color&lt;/name&gt;&lt;name&gt;Bandai WonderSwan Color&lt;/name&gt;&lt;name&gt;Bandai Wonder Swan Color&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;platform name="Xbox" id="32"&gt;&lt;otherNames&gt;&lt;name&gt;Microsoft Xbox&lt;/name&gt;&lt;name&gt;Xbox (origonal)&lt;/name&gt;&lt;name&gt;Microsoft Xbox (original)&lt;/name&gt;&lt;name&gt;Xbox 1&lt;/name&gt;&lt;name&gt;Microsoft Xbox 1&lt;/name&gt;&lt;/otherNames&gt;&lt;/platform&gt;&lt;/platformCollection&gt;&lt;languageCollection /&gt;&lt;/arcadiaLibrary&gt;</value>
+  </data>
+</root>

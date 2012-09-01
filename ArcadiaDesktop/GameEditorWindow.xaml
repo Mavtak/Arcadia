@@ -1,0 +1,31 @@
+﻿<Window x:Class="SomewhatGeeky.Arcadia.Desktop.GameEditorWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Game Editor" Height="368" Width="418">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="169*" />
+            <ColumnDefinition Width="298*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,0,0,104">
+            <Label>Name:</Label>
+            <Label>Platform:</Label>
+            <Label>Players</Label>
+            <Label>Rating</Label>
+            <Label>Community Rating</Label>
+            <Label></Label>
+            <Label>Library</Label>
+            <Label>Path In Library</Label>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="6,3.84,12,104">
+            <TextBox></TextBox>
+            <ComboBox></ComboBox>
+            <TextBox></TextBox>
+            <ComboBox></ComboBox>
+            <Label>(rating)</Label>
+            <Label></Label>
+            <ComboBox></ComboBox>
+            <TextBox></TextBox>
+        </StackPanel>
+    </Grid>
+</Window>

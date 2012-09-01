@@ -1,0 +1,15 @@
+﻿<Window x:Class="SomewhatGeeky.Arcadia.Desktop.PlatformEditorWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Platform Editor" Height="285" Width="555" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Label Height="28" Margin="12,11,0,0" Name="nameLabel" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97">Name:</Label>
+        <TextBox Height="23" Margin="115,16,12,0" Name="nameBox" VerticalAlignment="Top" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="12,45,0,0" Name="label1" VerticalAlignment="Top" Width="97">Other Names:</Label>
+        <TextBox Height="23" Margin="115,45,12,0" Name="otherNamesBox" VerticalAlignment="Top" />
+        <TextBox Height="23" Margin="115,74,12,0" Name="fileExtensionsBox" VerticalAlignment="Top" />
+        <Label Height="28" Margin="12,72,0,0" Name="label2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97">File Extensions:</Label>
+        <Button Name="okButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,103,93,121" IsDefault="True" Click="okButton_Click">OK</Button>
+        <Button Name="cancelButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,103,12,121" Click="cancelButton_Click" IsCancel="True">Cancel</Button>
+    </Grid>
+</Window>
