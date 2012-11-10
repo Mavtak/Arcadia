@@ -22,13 +22,11 @@ namespace SomewhatGeeky.Arcadia.Engine
         #endregion
 
 
-        public List<Emulator> GetEmulatorChoices(Platform platform)
+        public IEnumerable<Emulator> GetEmulatorChoices(Platform platform)
         {
-            List<Emulator> result = new List<Emulator>();
-
-            foreach (Emulator emulator in this)
-                if (emulator.CompatablePlatforms.Contains(platform))
-                    result.Add(emulator);
+            var result = from emulator in this
+                         where emulator.CompatablePlatforms.Contains(platform)
+                         select emulator;
 
             return result;
         }

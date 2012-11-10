@@ -261,7 +261,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
                 return;
 
             Emulator emulator = null;
-            List<Emulator> emulatorOptions = library.Emulators.GetEmulatorChoices(game.Platform);
+            var emulatorOptions = library.Emulators.GetEmulatorChoices(game.Platform).ToList();
 
             
             if (emulatorOptions.Count == 1)
