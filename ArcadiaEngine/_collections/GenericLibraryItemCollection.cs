@@ -7,9 +7,7 @@ using System.Xml;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
-    public class GenericLibraryItemCollection<TItemType>
-        : System.Collections.Generic.IEnumerable<TItemType>,
-        System.Collections.IEnumerable
+    public class GenericLibraryItemCollection<TItemType> : ICollection<TItemType>
         where TItemType : GenericLibraryItem, new()
     {
         private List<TItemType> items;
@@ -154,14 +152,19 @@ namespace SomewhatGeeky.Arcadia.Engine
             }
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        public System.Collections.Generic.IEnumerator<TItemType> GetEnumerator()
         {
             return items.GetEnumerator();
         }
 
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         System.Collections.Generic.IEnumerator<TItemType> System.Collections.Generic.IEnumerable<TItemType>.GetEnumerator()
         {
-            return items.GetEnumerator();
+            return GetEnumerator();
         }
 
         public virtual void Add(TItemType item)
@@ -197,6 +200,51 @@ namespace SomewhatGeeky.Arcadia.Engine
         public void RemoveAt(int index)
         {
             Remove(items[index]);
+        }
+
+        #endregion
+
+        #region ICollection<TItemType> implementation
+
+        void ICollection<TItemType>.Add(TItemType item)
+        {
+            Add(item);
+        }
+
+        void ICollection<TItemType>.Clear()
+        {
+            Clear();
+        }
+
+        bool ICollection<TItemType>.Contains(TItemType item)
+        {
+            return Contains(item);
+        }
+
+        void ICollection<TItemType>.CopyTo(TItemType[] array, int arrayIndex)
+        {
+            items.CopyTo(array, arrayIndex);
+        }
+
+        int ICollection<TItemType>.Count
+        {
+            get
+            {
+                return Count;
+            }
+        }
+
+        bool ICollection<TItemType>.IsReadOnly
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        bool ICollection<TItemType>.Remove(TItemType item)
+        {
+            return Remove(item);
         }
 
         #endregion

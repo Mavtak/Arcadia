@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
-    public class ArcadiaLibrary //TODO : IEnumerable<GenericLibraryItem>//, IEnumerable
+    public class ArcadiaLibrary : ICollection<GenericLibraryItem>
     {
         private EmulatorCollection emulatorCollection;
         private GameCollection gameCollection;
@@ -228,41 +228,189 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         #endregion
 
-
-        //IEnumerator IEnumerable.GetEnumerator()
-        //{
-        //    return null;
-        //}
-        //IEnumerator<GenericLibraryItem> IEnumerable<GenericLibraryItem>.GetEnumerator()
-        //{
-        //    foreach (GenericLibraryItem item in Emulators)
-        //        yield return item;
-        //}
-        //TODO:
+        public void Clear()
+        {
+            emulatorCollection.Clear();
+            gameCollection.Clear();
+            languageCollection.Clear();
+            platformCollection.Clear();
+            repositoryCollection.Clear();
+        }
 
         #region remove
 
-        public void Remove(Emulator emulator)
+        public bool Remove(Emulator emulator)
         {
-            Emulators.Remove(emulator);
+            return Emulators.Remove(emulator);
         }
-        public void Remove(Game game)
+        public bool Remove(Game game)
         {
-            Games.Remove(game);
+            return Games.Remove(game);
         }
-        public void Remove(Language language)
+        public bool Remove(Language language)
         {
-            Languages.Remove(language);
+            return Languages.Remove(language);
         }
-        public void Remove(Platform platform)
+        public bool Remove(Platform platform)
         {
-            Platforms.Remove(platform);
+            return Platforms.Remove(platform);
         }
-        public void Remove(Repository repository)
+        public bool Remove(Repository repository)
         {
-            Repositories.Remove(repository);
+            return Repositories.Remove(repository);
         }
 
         #endregion
+
+        #region ICollection
+
+        public bool IsReadOnly
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+        public IEnumerable<GenericLibraryItem> AllItems
+        {
+            get
+            {
+                var result = ((IEnumerable<GenericLibraryItem>)emulatorCollection)
+                        .Concat((IEnumerable<GenericLibraryItem>)gameCollection)
+                        .Concat((IEnumerable<GenericLibraryItem>)languageCollection)
+                        .Concat((IEnumerable<GenericLibraryItem>)platformCollection)
+                        .Concat((IEnumerable<GenericLibraryItem>)repositoryCollection);
+
+                return result;
+            }
+        }
+
+        #region IEnumerator<GenericLibraryItem>
+
+        IEnumerator<GenericLibraryItem> IEnumerable<GenericLibraryItem>.GetEnumerator()
+        {
+            return AllItems.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<GenericLibraryItem>)this).GetEnumerator();
+        }
+
+        #endregion
+
+        #region ICollection<GenericLibraryItem>
+
+        void ICollection<GenericLibraryItem>.Add(GenericLibraryItem item)
+        {
+            if (item is Emulator)
+            {
+                Add((Emulator)item);
+            }
+
+            if (item is Game)
+            {
+                Add((Game)item);
+            }
+
+            if (item is Language)
+            {
+                Add((Language)item);
+            }
+
+            if (item is Platform)
+            {
+                Add((Platform)item);
+            }
+
+            if (item is Repository)
+            {
+                Add((Repository)item);
+            }
+        }
+
+        void ICollection<GenericLibraryItem>.Clear()
+        {
+            Clear();
+        }
+
+        bool ICollection<GenericLibraryItem>.Contains(GenericLibraryItem item)
+        {
+            if (item is Emulator)
+            {
+                return Contains((Emulator)item);
+            }
+
+            if (item is Game)
+            {
+                return Contains((Game)item);
+            }
+
+            if (item is Language)
+            {
+                return Contains((Language)item);
+            }
+
+            if (item is Platform)
+            {
+                return Contains((Platform)item);
+            }
+
+            if (item is Repository)
+            {
+                return Contains((Repository)item);
+            }
+
+            return false;
+        }
+
+        void ICollection<GenericLibraryItem>.CopyTo(GenericLibraryItem[] array, int arrayIndex)
+        {
+            ((ICollection<GenericLibraryItem>)this).CopyTo(array, arrayIndex);
+        }
+
+        int ICollection<GenericLibraryItem>.Count
+        {
+            get
+            {
+                return AllItems.Count();
+            }
+        }
+
+        bool ICollection<GenericLibraryItem>.Remove(GenericLibraryItem item)
+        {
+            if (item is Emulator)
+            {
+                return Remove((Emulator)item);
+            }
+
+            if (item is Game)
+            {
+                return Remove((Game)item);
+            }
+
+            if (item is Language)
+            {
+                return Remove((Language)item);
+            }
+
+            if (item is Platform)
+            {
+                return Remove((Platform)item);
+            }
+
+            if (item is Repository)
+            {
+                return Remove((Repository)item);
+            }
+
+            return false;
+        }
+
+        #endregion
+
     }
 }
