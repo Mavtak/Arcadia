@@ -9,52 +9,40 @@ namespace SomewhatGeeky.Arcadia.Engine
 {
     public class PlatformCollection : GenericLibraryItemCollection<Platform>
     {
-        private List<string> commonFileExtensions;
+        public List<string> CommonFileExtensions { get; private set; }
 
         public PlatformCollection(ArcadiaLibrary parentGameLibrary)
             : base(parentGameLibrary)
         {
-            commonFileExtensions = new List<string>();
+            CommonFileExtensions = new List<string>();
         }
 
         #region xml
         protected override void writeToXmlExtension(XmlWriter writer)
         {
-            if (CommonFileExtensionsAreSet)
+            if (CommonFileExtensions.Count > 0)
+            {
                 Common.WriteListOfStringsToXml(writer, CommonFileExtensions, "commonFileExtensions", "extension");
+            }
         }
 
         protected override void readFromXmlExtension(XmlNode node)
         {
-            Common.ReadListOfStringsFromXml(node.SelectSingleNode("commonFileExtensions"), "extension", commonFileExtensions);
+            Common.ReadListOfStringsFromXml(node.SelectSingleNode("commonFileExtensions"), "extension", CommonFileExtensions);
         }
         #endregion
 
         #region Extensions
-        public bool CommonFileExtensionsAreSet
-        {
-            get
-            {
-                return commonFileExtensions != null && commonFileExtensions.Count > 0;
-            }
-        }
-        public List<string> CommonFileExtensions
-        {
-            get
-            {
-                if (commonFileExtensions == null)
-                    commonFileExtensions = new List<string>();
-                return commonFileExtensions;
-            }
-        }
+
         public bool ExtensionMatchesGeneric(string extensionToCheck)
         {
-            if (!CommonFileExtensionsAreSet)
-                return false;
-            foreach (string otherMatch in CommonFileExtensions)
-                if (extensionToCheck.Equals(otherMatch, StringComparison.InvariantCultureIgnoreCase))
-                    return true;
-            return false;
+            var matches = from extension in CommonFileExtensions
+                          where extension.Equals(extensionToCheck, StringComparison.InvariantCultureIgnoreCase)
+                          select extensionToCheck;
+
+            var result = matches.Any();
+
+            return result;
         }
 
         public IEnumerable<Platform> FindPlatformsByExtension(string extension)
@@ -70,28 +58,34 @@ namespace SomewhatGeeky.Arcadia.Engine
 
             return result;
         }
+
         public bool CheckIfIsRomExtension(string extension)
         {
             if (ExtensionMatchesGeneric(extension))
+            {
                 return true;
-            foreach (Platform platform in this)
-                if (platform.ExtensionMatches(extension))
-                    return true;
-            return false;
+            }
 
+            var matches = from platform in this
+                          where platform.ExtensionMatches(extension)
+                          select platform;
+
+            var result = matches.Any();
+
+            return result;
         }
+
         #endregion
 
         public IEnumerable<Platform> FindPlatformsByFileDirectory(string path)
         {
-            HashSet<Platform> alreadyReturned = new HashSet<Platform>();
+            var alreadyReturned = new HashSet<Platform>();
 
             foreach(string pathPart in path.Split(System.IO.Path.DirectorySeparatorChar))
             {
-                var moreMatches = ParentGameLibrary.Platforms.GetByName(pathPart);
+                var matches = ParentGameLibrary.Platforms.GetByName(pathPart);
 
-                //merge
-                foreach (Platform match in moreMatches)
+                foreach (var match in matches)
                 {
                     if (!alreadyReturned.Contains(match))
                     {
@@ -126,12 +120,15 @@ namespace SomewhatGeeky.Arcadia.Engine
 
             return base.Remove(item);
         }
+
         public override void Clear()
         {
             if (ParentGameLibrary != null)
             {
-                foreach (Game game in ParentGameLibrary.Games)
+                foreach (var game in ParentGameLibrary.Games)
+                {
                     game.Platform = null;
+                }
             }
             base.Clear();
         }
