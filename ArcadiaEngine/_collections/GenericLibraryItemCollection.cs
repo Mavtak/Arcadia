@@ -113,14 +113,6 @@ namespace SomewhatGeeky.Arcadia.Engine
             return GetByName(name, StringComparison.InvariantCulture);
         }
 
-        public TItemType GetById(string id)
-        {
-            foreach (TItemType item in this)
-                if (item.Id == id)
-                    return item;
-            throw new Exception("could not find item with id" + id);
-        }
-
         public List<TItemType> GetValues()
         {
             List<TItemType> result = new List<TItemType>(items.Count);
@@ -149,6 +141,23 @@ namespace SomewhatGeeky.Arcadia.Engine
             get
             {
                 return items[index];
+            }
+        }
+
+        public TItemType this[string id]
+        {
+            get
+            {
+                var result = from item in items
+                             where item.Id == id
+                             select item;
+
+                if (result.Any())
+                {
+                    return result.FirstOrDefault();
+                }
+
+                throw new KeyNotFoundException();
             }
         }
 

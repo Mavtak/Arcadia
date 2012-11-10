@@ -61,13 +61,13 @@ namespace SomewhatGeeky.Arcadia.Engine
         protected override void readFromXmlExtension(System.Xml.XmlNode node)
         {
             if (node.Attributes["languageId"] != null)
-                Language = ParentGameLibrary.Languages.GetById(node.Attributes["languageId"].Value);
+                Language = ParentGameLibrary.Languages[node.Attributes["languageId"].Value];
             if (node.Attributes["platformId"] != null)
-                Platform = ParentGameLibrary.Platforms.GetById(node.Attributes["platformId"].Value);
+                Platform = ParentGameLibrary.Platforms[node.Attributes["platformId"].Value];
             if (node.Attributes["players"] != null)
                 players = new NumberRange(node.Attributes["players"].Value);
             if (node.Attributes["repositoryId"] != null)
-                Repository = ParentGameLibrary.Repositories.GetById(node.Attributes["repositoryId"].Value);
+                Repository = ParentGameLibrary.Repositories[node.Attributes["repositoryId"].Value];
 
             if (node.Attributes["innerPath"] != null)
                 innerPath = node.Attributes["innerPath"].Value;

@@ -68,7 +68,7 @@ namespace SomewhatGeeky.Arcadia.Engine
             //read platforms
             if (node.SelectSingleNode("compatablePlatforms") != null)
                 foreach (XmlNode platformIdNode in node.SelectSingleNode("compatablePlatforms"))
-                    compatablePlatforms.Add(ParentGameLibrary.Platforms.GetById(platformIdNode.InnerXml));
+                    compatablePlatforms.Add(ParentGameLibrary.Platforms[platformIdNode.InnerXml]);
         }
         
         #endregion
