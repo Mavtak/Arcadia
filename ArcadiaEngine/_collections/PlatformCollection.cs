@@ -117,9 +117,15 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         public override bool Remove(Platform item)
         {
-            foreach (Game game in ParentGameLibrary.Games)
-                if (game.Platform == item)
-                    game.Platform = null;
+            var games = from game in ParentGameLibrary.Games
+                        where game.Platform == item
+                        select game;
+
+            foreach (var game in games)
+            {
+                game.Platform = null;
+            }
+
             return base.Remove(item);
         }
         public override void Clear()
