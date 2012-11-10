@@ -101,7 +101,7 @@ namespace SomewhatGeeky.Arcadia.Engine
             }
         }
 
-        public List<Platform> PossiblePlatforms
+        public IEnumerable<Platform> PossiblePlatforms
         {
             get
             {

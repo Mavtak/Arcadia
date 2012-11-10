@@ -281,9 +281,12 @@ namespace SomewhatGeeky.Arcadia.Engine
 
             if (overwrite || !PlatformIsSet)
             {
-                List<Platform> platformPossibilities = ParentGameLibrary.Platforms.FindPlatforms(FullPath);
+                var platformPossibilities = ParentGameLibrary.Platforms.FindPlatforms(FullPath).ToList();
                 if (platformPossibilities.Count == 1)
+                {
+                    //TODO: What if there are multiple matches?
                     Platform = platformPossibilities[0];
+                }
             }
         }
     }

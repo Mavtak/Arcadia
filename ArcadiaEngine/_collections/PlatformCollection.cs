@@ -57,15 +57,16 @@ namespace SomewhatGeeky.Arcadia.Engine
             return false;
         }
 
-        public List<Platform> FindPlatformsByExtension(string extension)
+        public IEnumerable<Platform> FindPlatformsByExtension(string extension)
         {
             if (extension.StartsWith("."))
+            {
                 extension = extension.Substring(1);
+            }
 
-            List<Platform> result = new List<Platform>();
-            foreach (Platform platform in this)
-                if (platform.ExtensionMatches(extension))
-                    result.Add(platform);
+            var result = from platform in this
+                         where platform.ExtensionMatches(extension)
+                         select platform;
 
             return result;
         }
@@ -81,9 +82,9 @@ namespace SomewhatGeeky.Arcadia.Engine
         }
         #endregion
 
-        public List<Platform> FindPlatformsByFileDirectory(string path)
+        public IEnumerable<Platform> FindPlatformsByFileDirectory(string path)
         {
-            List<Platform> matches = new List<Platform>();
+            HashSet<Platform> alreadyReturned = new HashSet<Platform>();
 
             foreach(string pathPart in path.Split(System.IO.Path.DirectorySeparatorChar))
             {
@@ -92,27 +93,24 @@ namespace SomewhatGeeky.Arcadia.Engine
                 //merge
                 foreach (Platform match in moreMatches)
                 {
-                    if (!matches.Contains(match))
-                        matches.Add(match);
+                    if (!alreadyReturned.Contains(match))
+                    {
+                        alreadyReturned.Add(match);
+                        yield return match;
+                    }
                 }
             }
-            return matches;
         }
 
-        public List<Platform> FindPlatforms(string filePath)
+        public IEnumerable<Platform> FindPlatforms(string filePath)
         {
-            List<Platform> matches = FindPlatformsByExtension(System.IO.Path.GetExtension(filePath));
+            var matches = FindPlatformsByExtension(System.IO.Path.GetExtension(filePath));
 
-            List<Platform> moreMatches = FindPlatformsByFileDirectory(System.IO.Path.GetDirectoryName(filePath));
+            var moreMatches = FindPlatformsByFileDirectory(System.IO.Path.GetDirectoryName(filePath));
 
-            //merge
-            foreach (Platform match in moreMatches)
-            {
-                if (!matches.Contains(match))
-                    matches.Add(match);
-            }
+            var results = matches.Union(moreMatches);
 
-            return matches;
+            return results;
         }
 
         public override bool Remove(Platform item)
