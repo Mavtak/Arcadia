@@ -183,18 +183,12 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         public virtual void Clear()
         {
-            while (items.Count > 0)
-                RemoveAt(items.Count - 1);
+            items.Clear();
         }
 
         public virtual bool Remove(TItemType item)
         {
             return items.Remove(item);
-        }
-
-        public void RemoveAt(int index)
-        {
-            Remove(items[index]);
         }
 
         #endregion
