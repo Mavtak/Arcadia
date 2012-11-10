@@ -11,11 +11,11 @@ namespace SomewhatGeeky.Arcadia.Engine
         where TItemType : GenericLibraryItem, new()
     {
         private List<TItemType> items;
-        private ArcadiaLibrary parentGameLibrary;
+        public ArcadiaLibrary ParentGameLibrary { get; private set; }
 
         public GenericLibraryItemCollection(ArcadiaLibrary parentGameLibrary)
         {
-            this.parentGameLibrary = parentGameLibrary;
+            ParentGameLibrary = parentGameLibrary;
             items = new List<TItemType>();
         }
         public GenericLibraryItemCollection()
@@ -113,14 +113,6 @@ namespace SomewhatGeeky.Arcadia.Engine
         public IEnumerable<TItemType> GetByName(string name)
         {
             return GetByName(name, StringComparison.InvariantCulture);
-        }
-
-        public ArcadiaLibrary ParentGameLibrary
-        {
-            get
-            {
-                return parentGameLibrary;
-            }
         }
 
         public void Sort()
