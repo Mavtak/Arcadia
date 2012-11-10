@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
@@ -51,6 +52,7 @@ namespace SomewhatGeeky.Arcadia.Engine
                 return !string.IsNullOrEmpty(rootPath);
             }
         }
+
         public string RootPath
         {
             get
@@ -62,14 +64,21 @@ namespace SomewhatGeeky.Arcadia.Engine
                 rootPath = value;
             }
         }
+
         public RepositoryType Type
         {
             get
             {
                 if (!RootPathIsSet)
+                {
                     return RepositoryType.SimpleList;
+                }
+
                 if (rootPath.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return RepositoryType.HTTP;
+                }
+
                 //if (rootPath.Substring(1, 1).Equals(":") || rootPath.StartsWith(@"\\"))
                     return RepositoryType.SystemIO;
                 //return RepositoryType.Unknown;
@@ -82,10 +91,12 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
             get
             {
-                int result = 0;
-                foreach (Game game in ParentGameLibrary.Games)
-                    if (game.Repository == this)
-                        result++;
+                var matches = from game in ParentGameLibrary.Games
+                              where game.Repository == this
+                              select game;
+
+                var result = matches.Count();
+
                 return result;
             }
 
@@ -109,37 +120,42 @@ namespace SomewhatGeeky.Arcadia.Engine
             }
         }
 
-        public List<Game> ScanForNewGames()
+        public IEnumerable<Game> ScanForNewGames()
         {
             //TODO: Speed this up!
 
-
             if (!CanScanForNewGames)
+            {
+                //TODO: throw more specific exception
                 throw new Exception("Can't scan for games in the \"" + Name + "\" repository.");
+            }
 
-            List<Game> result = new List<Game>();
+            var files = Directory.GetFiles(RootPath, "*", System.IO.SearchOption.AllDirectories);
 
-            foreach (String filePath in System.IO.Directory.GetFiles(RootPath, "*", System.IO.SearchOption.AllDirectories))
+            foreach (var filePath in files)
             {
                 string extension = System.IO.Path.GetExtension(filePath).Replace(".", "");
                 if (ParentGameLibrary.Platforms.CheckIfIsRomExtension(extension) && !ParentGameLibrary.Games.ContainsPath(filePath))
                 {
-                    Game addedGame = AddGame(filePath);
-                    result.Add(addedGame);
+                    var addedGame = AddGame(filePath);
+                    yield return addedGame;
                 }
             }
-
-            return result;
         }
 
         public Game AddGame(string gamePath)
         {
             if (!gamePath.StartsWith(RootPath, StringComparison.InvariantCultureIgnoreCase))
+            {
+                //TODO: throw more specific exception
                 throw new Exception("Game " + gamePath + " is not in the domain of this repository.");
+            }
 
-            Game game = new Game(System.IO.Path.GetFileName(gamePath), ParentGameLibrary);
-            game.Repository = this;
-            game.InnerPath = gamePath.Substring(RootPath.Length);
+            var game = new Game(System.IO.Path.GetFileName(gamePath), ParentGameLibrary)
+            {
+                Repository = this,
+                InnerPath = gamePath.Substring(RootPath.Length)
+            };
 
             game.FillInInformation(true);
 
@@ -147,8 +163,6 @@ namespace SomewhatGeeky.Arcadia.Engine
 
             return game;
         }
-
-        
 
         #endregion
 

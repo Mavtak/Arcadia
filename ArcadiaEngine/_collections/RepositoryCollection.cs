@@ -11,8 +11,7 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         public RepositoryCollection(ArcadiaLibrary parentLibrary)
             : base(parentLibrary)
-        {
-        }
+        { }
 
 
         #region xml
@@ -20,7 +19,9 @@ namespace SomewhatGeeky.Arcadia.Engine
         protected override void writeToXmlExtension(System.Xml.XmlWriter writer)
         {
             if (RootPathIsSet)
+            {
                 writer.WriteAttributeString("rootPath", RootPath);
+            }
         }
 
         protected override void readFromXmlExtension(System.Xml.XmlNode node)

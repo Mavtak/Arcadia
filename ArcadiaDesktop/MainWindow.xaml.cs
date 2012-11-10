@@ -326,8 +326,17 @@ namespace SomewhatGeeky.Arcadia.Desktop
             {
                 try
                 {
-                    List<Game> addedGames = repository.ScanForNewGames();
-                    addedCount += addedGames.Count;
+                    var addedGames = repository.ScanForNewGames();
+
+                    foreach (var game in addedGames)
+                    {
+                        addedCount++;
+
+                        if(addedCount % 100 == 0)
+                        {
+                            changeWindowTitle("Scanning... added " + addedCount);
+                        }
+                    }
                 }
                 catch (System.IO.DirectoryNotFoundException exc1)
                 {
