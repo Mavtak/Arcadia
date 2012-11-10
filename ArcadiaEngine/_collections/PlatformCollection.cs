@@ -87,7 +87,7 @@ namespace SomewhatGeeky.Arcadia.Engine
 
             foreach(string pathPart in path.Split(System.IO.Path.DirectorySeparatorChar))
             {
-                List<Platform> moreMatches = ParentGameLibrary.Platforms.GetByName(pathPart);
+                var moreMatches = ParentGameLibrary.Platforms.GetByName(pathPart);
 
                 //merge
                 foreach (Platform match in moreMatches)

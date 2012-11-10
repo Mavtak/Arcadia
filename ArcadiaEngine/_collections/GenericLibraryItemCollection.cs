@@ -97,18 +97,20 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         #endregion
 
-        public List<TItemType> GetByName(string name, StringComparison comparison)
+        public IEnumerable<TItemType> GetByName(string name, StringComparison comparison)
         {
             List<TItemType> toReturn = new List<TItemType>();
 
             foreach (TItemType item in this)
+            {
                 if (item.NameMatches(name, comparison))
-                    toReturn.Add(item);
-
-            return toReturn;
+                {
+                    yield return item;
+                }
+            }
         }
 
-        public List<TItemType> GetByName(string name)
+        public IEnumerable<TItemType> GetByName(string name)
         {
             return GetByName(name, StringComparison.InvariantCulture);
         }
