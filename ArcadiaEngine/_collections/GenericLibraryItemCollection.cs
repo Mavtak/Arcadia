@@ -99,8 +99,6 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         public IEnumerable<TItemType> GetByName(string name, StringComparison comparison)
         {
-            List<TItemType> toReturn = new List<TItemType>();
-
             foreach (TItemType item in this)
             {
                 if (item.NameMatches(name, comparison))
