@@ -113,14 +113,6 @@ namespace SomewhatGeeky.Arcadia.Engine
             return GetByName(name, StringComparison.InvariantCulture);
         }
 
-        public List<TItemType> GetValues()
-        {
-            List<TItemType> result = new List<TItemType>(items.Count);
-            foreach (TItemType item in items)
-                result.Add(item);
-            return result;
-        }
-
         public ArcadiaLibrary ParentGameLibrary
         {
             get

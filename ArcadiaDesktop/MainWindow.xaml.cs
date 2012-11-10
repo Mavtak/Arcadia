@@ -271,7 +271,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             else
             {
                 if (emulatorOptions.Count == 0)
-                    emulatorOptions = library.Emulators.GetValues();
+                    emulatorOptions = library.Emulators.ToList();
 
                 EmulatorSelectorWindow dialog = new EmulatorSelectorWindow(this, library.Emulators, emulatorOptions);
                 dialog.ShowDialog();

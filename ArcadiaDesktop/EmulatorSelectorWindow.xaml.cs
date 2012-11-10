@@ -82,7 +82,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void editEmulatorsLink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            List<Emulator> existingEmulators = completeCollection.GetValues();
+            List<Emulator> existingEmulators = completeCollection.ToList();
             EmulatorListWindow dialog = new EmulatorListWindow(this, completeCollection);
             dialog.ShowDialog();
 
