@@ -10,7 +10,7 @@ namespace SomewhatGeeky.Arcadia.Engine
     {
         private static IdGenerator idGenerator = new IdGenerator();
 
-        public static void WriteListOfStringsToXml(XmlWriter writer, List<string> list, string nodeName, string childNodesName)
+        public static void WriteListOfStringsToXml(XmlWriter writer, IEnumerable<string> list, string nodeName, string childNodesName)
         {
             if (list == null)
                 return;
@@ -21,7 +21,7 @@ namespace SomewhatGeeky.Arcadia.Engine
             writer.WriteEndElement();
         }
 
-        public static void ReadListOfStringsFromXml(XmlNode node, string childNodesName, List<string> list)
+        public static void ReadListOfStringsFromXml(XmlNode node, string childNodesName, ICollection<string> list)
         {
             if (node == null)
                 return;
@@ -51,7 +51,7 @@ namespace SomewhatGeeky.Arcadia.Engine
             return result;
         }
 
-        public static string ListToString(List<string> items)
+        public static string ListToString(IEnumerable<string> items)
         {
             StringBuilder result = new StringBuilder();
             foreach(string item in items)

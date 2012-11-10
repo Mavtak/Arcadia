@@ -182,7 +182,7 @@ namespace SomewhatGeeky.Arcadia.Engine
             }
         }
 
-        public bool NameMatches(string value, StringComparison comparisonType)
+        public virtual bool NameMatches(string value, StringComparison comparisonType)
         {
             if (value.Equals(Name, comparisonType))
                 return true;

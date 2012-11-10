@@ -9,7 +9,9 @@
         <TextBox Height="23" Margin="115,45,12,0" Name="otherNamesBox" VerticalAlignment="Top" />
         <TextBox Height="23" Margin="115,74,12,0" Name="fileExtensionsBox" VerticalAlignment="Top" />
         <Label Height="28" Margin="12,72,0,0" Name="label2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97">File Extensions:</Label>
-        <Button Name="okButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,103,93,121" IsDefault="True" Click="okButton_Click">OK</Button>
-        <Button Name="cancelButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,103,12,121" Click="cancelButton_Click" IsCancel="True">Cancel</Button>
+        <Label Height="28" Margin="12,106,0,0" Name="namePatternsLabel" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97">Name Patterns:</Label>
+        <TextBox Height="23" Margin="115,106,12,0" Name="namePatternsBox" VerticalAlignment="Top" />
+        <Button Name="okButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,135,93,0" IsDefault="True" Click="okButton_Click">OK</Button>
+        <Button Name="cancelButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,135,12,0" Click="cancelButton_Click" IsCancel="True">Cancel</Button>
     </Grid>
 </Window>

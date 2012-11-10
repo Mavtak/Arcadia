@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using SomewhatGeeky.Arcadia.Engine;
+using System.Text.RegularExpressions;
 
 namespace SomewhatGeeky.Arcadia.Desktop
 {
@@ -33,6 +34,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             nameBox.Text = item.Name;
             otherNamesBox.Text = Common.ListToString(item.OtherNames);
             fileExtensionsBox.Text = Common.ListToString(item.UniqueFileExtensions);
+            namePatternsBox.Text = Common.ListToString(item.NamePatterns.Select(pattern => pattern.ToString()));
         }
 
         public PlatformEditorWindow(Window owner):this(owner, new Platform())
@@ -65,6 +67,13 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
             item.UniqueFileExtensions.Clear();
             item.UniqueFileExtensions.AddRange(Common.StringToList(fileExtensionsBox.Text));
+
+            item.NamePatterns.Clear();
+            foreach (string pattern in Common.StringToList(namePatternsBox.Text))
+            {
+                var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+                item.NamePatterns.Add(regex);
+            }
         }
     }
 }
