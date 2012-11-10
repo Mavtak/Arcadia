@@ -7,7 +7,7 @@ namespace SomewhatGeeky.Arcadia.Engine
 {
     public class RepositoryCollection : GenericLibraryItemCollection<Repository>
     {
-        private string rootPath;
+        public string RootPath { get; set; }
 
         public RepositoryCollection(ArcadiaLibrary parentLibrary)
             : base(parentLibrary)
@@ -20,13 +20,15 @@ namespace SomewhatGeeky.Arcadia.Engine
         protected override void writeToXmlExtension(System.Xml.XmlWriter writer)
         {
             if (RootPathIsSet)
-                writer.WriteAttributeString("rootPath", rootPath);
+                writer.WriteAttributeString("rootPath", RootPath);
         }
 
         protected override void readFromXmlExtension(System.Xml.XmlNode node)
         {
             if (node.Attributes["rootPath"] != null)
-                rootPath = node.Attributes["rootPath"].Value;
+            {
+                RootPath = node.Attributes["rootPath"].Value;
+            }
         }
 
         #endregion
@@ -37,19 +39,7 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
             get
             {
-                return !String.IsNullOrEmpty(rootPath);
-            }
-        }
-
-        public string RootPath
-        {
-            get
-            {
-                return rootPath;
-            }
-            set
-            {
-                rootPath = value;
+                return !String.IsNullOrEmpty(RootPath);
             }
         }
 
@@ -58,11 +48,20 @@ namespace SomewhatGeeky.Arcadia.Engine
             get
             {
                 if (!RootPathIsSet)
+                {
                     return RepositoryType.SimpleList;
-                if (rootPath.StartsWith("http:\\", StringComparison.InvariantCultureIgnoreCase))
+                }
+
+                if (RootPath.StartsWith("http:\\", StringComparison.InvariantCultureIgnoreCase))
+                {
                     return RepositoryType.HTTP;
-                if (rootPath.Substring(1, 1) == ":")
+                }
+
+                if (RootPath.Substring(1, 1) == ":")
+                {
                     return RepositoryType.SystemIO;
+                }
+
                 return RepositoryType.Unknown;
             }
         }
@@ -80,7 +79,7 @@ namespace SomewhatGeeky.Arcadia.Engine
                         return true;
 
                     case RepositoryType.SystemIO:
-                        return System.IO.Directory.Exists(rootPath);
+                        return System.IO.Directory.Exists(RootPath);
 
                     case RepositoryType.Unknown:
                         return false;
@@ -97,18 +96,20 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
             lock (ParentGameLibrary)
             {
-                for (int x = 0; x < ParentGameLibrary.Games.Count; x++)
+                var games = from game in ParentGameLibrary.Games
+                              where game.Repository == item
+                              select game;
+
+                //TODO: avoid calling ToList()
+                foreach (var game in games.ToList())
                 {
-                    Game game = ParentGameLibrary.Games[x];
-                    if (game.Repository == item)
-                    {
-                        ParentGameLibrary.Remove(game);
-                        x--;
-                    }
+                    ParentGameLibrary.Remove(game);
                 }
+
                 return base.Remove(item);
             }
         }
+
         public override void Clear()
         {
             ParentGameLibrary.Games.Clear();
