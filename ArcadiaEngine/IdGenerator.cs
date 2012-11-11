@@ -3,17 +3,13 @@ namespace SomewhatGeeky.Arcadia.Engine
 {
     public class IdGenerator
     {
-        private int lastIdUsed = 0;
+        private int lastIdUsed;
+
         public IdGenerator()
         {
+            lastIdUsed = 0;
         }
-        public int NextInt()
-        {
-            lock (this)
-            {
-                return ++lastIdUsed;
-            }
-        }
+
         public string NextString()
         {
             lock (this)
