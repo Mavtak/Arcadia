@@ -111,9 +111,10 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
             get
             {
-                string fullName = this.GetType().FullName;
-                string lastPart = fullName.Substring(fullName.LastIndexOf(".") + 1);
-                return lastPart.Substring(0, 1).ToLower() + lastPart.Substring(1);
+                var result = this.GetType().Name;
+                result = result.Substring(0, 1).ToLower() + result.Substring(1);
+
+                return result;
             }
         }
 

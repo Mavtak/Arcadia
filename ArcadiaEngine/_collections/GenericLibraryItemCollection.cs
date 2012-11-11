@@ -49,9 +49,11 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
 
         }
+
         #endregion
 
         #region reading
+
         public void ReadFromXml(XmlNode node, string libraryItemNodesName)
         {
             if (node == null)
@@ -67,10 +69,12 @@ namespace SomewhatGeeky.Arcadia.Engine
                 Add(item);
             }
         }
+
         public virtual void ReadFromXml(XmlNode node)
         {
             ReadFromXml(node, DefaultXmlChildNodeName);
         }
+
         protected virtual void readFromXmlExtension(XmlNode node)
         {
 
@@ -94,6 +98,8 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
             get
             {
+                //TODO: remove this property and use GenericLibraryItem.DefaultXMlNodeName instead
+
                 return DefaultXmlNodeName.Replace("Collection", "");
             }
         }
