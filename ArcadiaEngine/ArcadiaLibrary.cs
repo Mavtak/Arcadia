@@ -7,7 +7,6 @@ using System.Xml;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
-    [System.Runtime.InteropServices.GuidAttribute("1A2B6E5D-AB5B-4BA9-8563-4A8E9A403D5B")]
     public class ArcadiaLibrary : ICollection<GenericLibraryItem>
     {
         public EmulatorCollection Emulators { get; private set; }
