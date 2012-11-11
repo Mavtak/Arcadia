@@ -7,22 +7,24 @@ using System.Xml;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
+    [System.Runtime.InteropServices.GuidAttribute("1A2B6E5D-AB5B-4BA9-8563-4A8E9A403D5B")]
     public class ArcadiaLibrary : ICollection<GenericLibraryItem>
     {
-        private EmulatorCollection emulatorCollection;
-        private GameCollection gameCollection;
-        private LanguageCollection languageCollection;
-        private PlatformCollection platformCollection;
-        private RepositoryCollection repositoryCollection;
-        private LibrarySearcher searcher;
+        public EmulatorCollection Emulators { get; private set; }
+        public GameCollection Games { get; private set; }
+        public LanguageCollection Languages { get; private set; }
+        public PlatformCollection Platforms { get; private set; }
+        public RepositoryCollection Repositories { get; private set; }
+        public LibrarySearcher Searcher { get; private set; }
+
         public ArcadiaLibrary()
         {
-            emulatorCollection = new EmulatorCollection(this);
-            gameCollection = new GameCollection(this);
-            languageCollection = new LanguageCollection(this);
-            platformCollection = new PlatformCollection(this);
-            repositoryCollection = new RepositoryCollection(this);
-            searcher = new LibrarySearcher(this);
+            Emulators = new EmulatorCollection(this);
+            Games = new GameCollection(this);
+            Languages = new LanguageCollection(this);
+            Platforms = new PlatformCollection(this);
+            Repositories = new RepositoryCollection(this);
+            Searcher = new LibrarySearcher(this);
         }
 
         public override string ToString()
@@ -48,11 +50,11 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
             writer.WriteStartElement(nodeName);
 
-            platformCollection.WriteToXml(writer);
-            languageCollection.WriteToXml(writer);
-            emulatorCollection.WriteToXml(writer);
-            repositoryCollection.WriteToXml(writer);
-            gameCollection.WriteToXml(writer);
+            Platforms.WriteToXml(writer);
+            Languages.WriteToXml(writer);
+            Emulators.WriteToXml(writer);
+            Repositories.WriteToXml(writer);
+            Games.WriteToXml(writer);
 
             writer.WriteEndElement();
         }
@@ -62,11 +64,11 @@ namespace SomewhatGeeky.Arcadia.Engine
             if(node == null)
                 return;
 
-            platformCollection.ReadFromXml(node.SelectSingleNode("platformCollection"));
-            languageCollection.ReadFromXml(node.SelectSingleNode("languageCollection"));
-            emulatorCollection.ReadFromXml(node.SelectSingleNode("emulatorCollection"));
-            repositoryCollection.ReadFromXml(node.SelectSingleNode("repositoryCollection"));
-            gameCollection.ReadFromXml(node.SelectSingleNode("gameCollection"));
+            Platforms.ReadFromXml(node.SelectSingleNode("platformCollection"));
+            Languages.ReadFromXml(node.SelectSingleNode("languageCollection"));
+            Emulators.ReadFromXml(node.SelectSingleNode("emulatorCollection"));
+            Repositories.ReadFromXml(node.SelectSingleNode("repositoryCollection"));
+            Games.ReadFromXml(node.SelectSingleNode("gameCollection"));
         }
 
         public string DefaultXmlNodeName
@@ -106,8 +108,8 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
             writer.WriteStartElement(nodeName);
 
-            platformCollection.WriteToXml(writer);
-            languageCollection.WriteToXml(writer);
+            Platforms.WriteToXml(writer);
+            Languages.WriteToXml(writer);
 
             writer.WriteEndElement();
         }
@@ -126,58 +128,6 @@ namespace SomewhatGeeky.Arcadia.Engine
         }
         #endregion
 
-        #region accessors
-
-        public PlatformCollection Platforms
-        {
-            get
-            {
-                return platformCollection;
-            }
-        }
-
-        public LanguageCollection Languages
-        {
-            get
-            {
-                return languageCollection;
-            }
-        }
-
-        public EmulatorCollection Emulators
-        {
-            get
-            {
-                return emulatorCollection;
-            }
-        }
-
-        public GameCollection Games
-        {
-            get
-            {
-                return gameCollection;
-            }
-        }
-
-        public RepositoryCollection Repositories
-        {
-            get
-            {
-                return repositoryCollection;
-            }
-        }
-
-        public LibrarySearcher Searcher
-        {
-            get
-            {
-                return searcher;
-            }
-        }
-
-        #endregion
-        
         public IEnumerable<Game> ScanForNewGames()
         {
             foreach (var repository in Repositories)
@@ -241,11 +191,11 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         public void Clear()
         {
-            emulatorCollection.Clear();
-            gameCollection.Clear();
-            languageCollection.Clear();
-            platformCollection.Clear();
-            repositoryCollection.Clear();
+            Emulators.Clear();
+            Games.Clear();
+            Languages.Clear();
+            Platforms.Clear();
+            Repositories.Clear();
         }
 
         #region remove
@@ -289,11 +239,11 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
             get
             {
-                var result = ((IEnumerable<GenericLibraryItem>)emulatorCollection)
-                        .Concat((IEnumerable<GenericLibraryItem>)gameCollection)
-                        .Concat((IEnumerable<GenericLibraryItem>)languageCollection)
-                        .Concat((IEnumerable<GenericLibraryItem>)platformCollection)
-                        .Concat((IEnumerable<GenericLibraryItem>)repositoryCollection);
+                var result = ((IEnumerable<GenericLibraryItem>)Emulators)
+                        .Concat((IEnumerable<GenericLibraryItem>)Games)
+                        .Concat((IEnumerable<GenericLibraryItem>)Languages)
+                        .Concat((IEnumerable<GenericLibraryItem>)Platforms)
+                        .Concat((IEnumerable<GenericLibraryItem>)Repositories);
 
                 return result;
             }
