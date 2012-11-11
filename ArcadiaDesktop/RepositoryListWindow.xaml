@@ -7,7 +7,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="150" Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Width="300" Header="Name" DisplayMemberBinding="{Binding RootPath}"/>
+                    <GridViewColumn Width="300" Header="Path" DisplayMemberBinding="{Binding RootPath}"/>
                 </GridView>
             </ListView.View>
         </ListView>
