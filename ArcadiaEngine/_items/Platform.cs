@@ -7,7 +7,7 @@ namespace SomewhatGeeky.Arcadia.Engine
 {
     public class Platform : GenericLibraryItem, IFilterItem
     {
-        private List<string> uniqueFileExtensions;
+        public List<string> UniqueFileExtensions { get; private set; }
         public ICollection<Regex> NamePatterns { get; private set; }
 
         #region constructors
@@ -16,13 +16,17 @@ namespace SomewhatGeeky.Arcadia.Engine
             : base(name, parentGameLibrary)
         {
             NamePatterns = new LinkedList<Regex>();
+            UniqueFileExtensions = new List<string>();
         }
+
         public Platform(string name)
             : this(name, null)
         { }
+
         public Platform(ArcadiaLibrary parentGameLibrary)
             : this(null, parentGameLibrary)
         { }
+
         public Platform()
             : this(null, null)
         { }
@@ -39,7 +43,9 @@ namespace SomewhatGeeky.Arcadia.Engine
         protected override void writeToXmlExtension(System.Xml.XmlWriter writer)
         {
             if (UniqueFileExtensionsAreSet)
+            {
                 Common.WriteListOfStringsToXml(writer, UniqueFileExtensions, "uniqueFileExtensions", "extension");
+            }
 
             if (NamePatterns.Count > 0)
             {
@@ -68,26 +74,20 @@ namespace SomewhatGeeky.Arcadia.Engine
         {
             get
             {
-                return uniqueFileExtensions != null && uniqueFileExtensions.Count > 0;
+                return UniqueFileExtensions != null && UniqueFileExtensions.Count > 0;
             }
         }
-        public List<string> UniqueFileExtensions
-        {
-            get
-            {
-                if (uniqueFileExtensions == null)
-                    uniqueFileExtensions = new List<string>();
-                return uniqueFileExtensions;
-            }
-        }
+
         public bool ExtensionMatches(string extensionToCheck)
         {
             if (!UniqueFileExtensionsAreSet)
+            {
                 return false;
-            foreach (string otherMatch in UniqueFileExtensions)
-                if (extensionToCheck.Equals(otherMatch, StringComparison.InvariantCultureIgnoreCase))
-                    return true;
-            return false;
+            }
+
+            var result = UniqueFileExtensions.Any(extension => extensionToCheck.Equals(extension, StringComparison.InvariantCultureIgnoreCase));
+
+            return result;
         }
 
         public override bool NameMatches(string value, StringComparison comparisonType)
@@ -104,6 +104,7 @@ namespace SomewhatGeeky.Arcadia.Engine
 
             return false;
         }
+
         #endregion
 
     }
