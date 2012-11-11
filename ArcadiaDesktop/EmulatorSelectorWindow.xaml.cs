@@ -39,18 +39,14 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             get
             {
-                if (!DialogResult.HasValue)
+                if (!DialogResult.HasValue || DialogResult != true || itemList.SelectedItems.Count != 1)
+                {
                     return null;
-                if (DialogResult != true)
-                    return null;
-                if (itemList.SelectedItems.Count != 1)
-                    return null;
+                }
 
-                return (Emulator)(itemList.SelectedItem);
+                return itemList.SelectedItem as Emulator;
             }
         }
-
-
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -62,12 +58,16 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             if (e.Key == Key.Enter
                 && itemList.SelectedItems.Count == 1)
+            {
                 okButton_Click(sender, null);
+            }
         }
         private void itemList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (itemList.SelectedItems.Count == 1)
+            {
                 okButton_Click(sender, null);
+            }
         }
 
         private void itemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -82,26 +82,31 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void editEmulatorsLink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            List<Emulator> existingEmulators = completeCollection.ToList();
-            EmulatorListWindow dialog = new EmulatorListWindow(this, completeCollection);
+            var existingEmulators = completeCollection.ToList();
+            var dialog = new EmulatorListWindow(this, completeCollection);
             dialog.ShowDialog();
 
             //remove removed emulators
-            List<Emulator> toRemove = new List<Emulator>();
-            foreach (Emulator emulator in options)
+            var toRemove = new List<Emulator>();
+            foreach (var emulator in options)
             {
-                if(!completeCollection.Contains(emulator))
+                if (!completeCollection.Contains(emulator))
+                {
                     toRemove.Add(emulator);
+                }
             }
-            foreach (Emulator emulator in toRemove)
+            foreach (var emulator in toRemove)
+            {
                 options.Remove(emulator);
-
+            }
 
             //add new emulators
             foreach (Emulator emulator in completeCollection)
             {
                 if (!existingEmulators.Contains(emulator))
+                {
                     options.Add(emulator);
+                }
             }
 
             itemList.Items.Refresh();

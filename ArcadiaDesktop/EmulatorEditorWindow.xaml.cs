@@ -10,8 +10,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 using SomewhatGeeky.Arcadia.Engine;
+
 
 namespace SomewhatGeeky.Arcadia.Desktop
 {
@@ -41,22 +43,27 @@ namespace SomewhatGeeky.Arcadia.Desktop
             {
                 int index = platformsList.Items.IndexOf(platform);
                 if (index < 0)
+                {
                     throw new Exception("David!  What did I say about that lazy programming?");
+                }
+
                 platformsList.SelectedItems.Add(platformsList.Items[index]);
             }
         }
 
         public EmulatorEditorWindow(Window owner, PlatformCollection platforms)
             : this(owner, platforms, new Emulator(platforms.ParentGameLibrary))
-        {
-        }
+        { }
 
         public Emulator Result
         {
             get
             {
                 if (DialogResult.HasValue && DialogResult == true)
+                {
                     return item;
+                }
+
                 return null;
             }
         }
@@ -86,16 +93,20 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
             item.CompatablePlatforms.Clear();
             foreach (Platform platform in platformsList.SelectedItems)
+            {
                 item.CompatablePlatforms.Add(platform);
+            }
         }
 
         private void browseButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+            var dialog = new OpenFileDialog();
             dialog.Filter = "Program Files|*.exe";
 
-            if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            if (dialog.ShowDialog() != true)
+            {
                 return;
+            }
 
             string path = dialog.FileName;
 
@@ -104,13 +115,15 @@ namespace SomewhatGeeky.Arcadia.Desktop
             locationBox.Text = path;
 
             if (String.IsNullOrEmpty(nameBox.Text))
+            {
                 nameBox.Text = System.IO.Path.GetFileName(System.IO.Path.GetDirectoryName(path));
+            }
         }
 
         private void argumentPatternHelpLink_Click(object sender, RoutedEventArgs e)
         {
             GuiCommon.ShowMessageBox(
-                "$(FilePath) represents the file path.  Leave blank for the default value.\n\nMost programs require \"$(FilePath)\" (WITH quotes), but Project 64 requires \"$(FilePath)\" WITHOUT quotes.",
+                Emulator.ArgumentPatternFileVariable + " represents the file path.  Leave blank for the default value.\n\nMost programs require \"$(FilePath)\" (WITH quotes), but Project 64 requires \"$(FilePath)\" WITHOUT quotes.",
                 MessageBoxButton.OK, MessageBoxImage.Information);
         }
 

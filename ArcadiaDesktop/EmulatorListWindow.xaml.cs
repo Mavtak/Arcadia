@@ -36,10 +36,12 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
-            EmulatorEditorWindow window = new EmulatorEditorWindow(this, collection.ParentGameLibrary.Platforms);
+            var window = new EmulatorEditorWindow(this, collection.ParentGameLibrary.Platforms);
             window.ShowDialog();
             if (window.Result == null)
+            {
                 return;
+            }
 
             collection.Add(window.Result);
             itemList.Items.Refresh();
@@ -47,10 +49,13 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
-            Emulator item = (Emulator)(itemList.SelectedItem);
+            var item = itemList.SelectedItem as Emulator;
             if (item == null)
+            {
                 throw new Exception("David, lazy programming fail!");
-            EmulatorEditorWindow window = new EmulatorEditorWindow(this, collection.ParentGameLibrary.Platforms, item);
+            }
+
+            var window = new EmulatorEditorWindow(this, collection.ParentGameLibrary.Platforms, item);
             window.ShowDialog();
             itemList.Items.Refresh();
         }
@@ -61,6 +66,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             {
                 collection.Remove(platform);
             }
+
             itemList.Items.Refresh();
         }
 
@@ -74,12 +80,16 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             if (e.Key == Key.Enter
                 && itemList.SelectedItems.Count == 1)
+            {
                 editButton_Click(sender, null);
+            }
         }
         private void itemList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (itemList.SelectedItems.Count == 1)
+            {
                 editButton_Click(sender, null);
+            }
         }
     }
 }

@@ -35,7 +35,9 @@ namespace SomewhatGeeky.Arcadia.Desktop
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape || e.Key == Key.Enter)
+            {
                 this.Close();
+            }
         }
     }
 }

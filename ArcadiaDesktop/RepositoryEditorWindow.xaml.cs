@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using SomewhatGeeky.Arcadia.Engine;
+using System.Windows.Forms;
 
 namespace SomewhatGeeky.Arcadia.Desktop
 {
@@ -44,7 +45,10 @@ namespace SomewhatGeeky.Arcadia.Desktop
             get
             {
                 if (DialogResult.HasValue && DialogResult == true)
+                {
                     return item;
+                }
+
                 return null;
             }
         }
@@ -65,11 +69,13 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void browseButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
+            var dialog = new FolderBrowserDialog();
             dialog.Description = "Select a root directory.";
 
             if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            {
                 return;
+            }
 
             string path = dialog.SelectedPath;
 
@@ -81,12 +87,13 @@ namespace SomewhatGeeky.Arcadia.Desktop
             {
                 nameBox.Text = System.IO.Path.GetFileName(path);
 
-
                 if (path.StartsWith(@"\\"))
                 {
                     string networkComputerName = path;
-                    while(!string.IsNullOrEmpty(System.IO.Path.GetDirectoryName(networkComputerName)))
+                    while (!string.IsNullOrEmpty(System.IO.Path.GetDirectoryName(networkComputerName)))
+                    {
                         networkComputerName = System.IO.Path.GetDirectoryName(networkComputerName);
+                    }
                     networkComputerName = networkComputerName.Substring(2, networkComputerName.LastIndexOf(@"\") - 2);
                     nameBox.Text += " on " + networkComputerName;
                 }

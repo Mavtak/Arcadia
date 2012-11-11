@@ -37,16 +37,19 @@ namespace SomewhatGeeky.Arcadia.Desktop
             namePatternsBox.Text = Common.ListToString(item.NamePatterns.Select(pattern => pattern.ToString()));
         }
 
-        public PlatformEditorWindow(Window owner):this(owner, new Platform())
-        {
-        }
+        public PlatformEditorWindow(Window owner)
+            : this(owner, new Platform())
+        { }
 
         public Platform Result
         {
             get
             {
                 if (DialogResult.HasValue && DialogResult == true)
+                {
                     return item;
+                }
+
                 return null;
             }
         }

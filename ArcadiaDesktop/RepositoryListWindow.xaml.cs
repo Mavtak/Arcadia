@@ -36,10 +36,12 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
-            RepositoryEditorWindow window = new RepositoryEditorWindow(this, collection.ParentGameLibrary);
+            var window = new RepositoryEditorWindow(this, collection.ParentGameLibrary);
             window.ShowDialog();
             if (window.Result == null)
+            {
                 return;
+            }
 
             collection.Add(window.Result);
             itemList.Items.Refresh();
@@ -47,10 +49,14 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
-            Repository item = (Repository)(itemList.SelectedItem);
+            var item = itemList.SelectedItem as Repository;
+
             if (item == null)
+            {
                 throw new Exception("David, lazy programming fail!");
-            RepositoryEditorWindow window = new RepositoryEditorWindow(this, item);
+            }
+
+            var window = new RepositoryEditorWindow(this, item);
             window.ShowDialog();
             itemList.Items.Refresh();
         }
@@ -61,6 +67,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             {
                 collection.Remove(platform);
             }
+
             itemList.Items.Refresh();
         }
 
@@ -74,12 +81,16 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             if (e.Key == Key.Enter
                 && itemList.SelectedItems.Count == 1)
+            {
                 editButton_Click(sender, null);
+            }
         }
         private void itemList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (itemList.SelectedItems.Count == 1)
+            {
                 editButton_Click(sender, null);
+            }
         }
     }
 }
