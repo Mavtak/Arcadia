@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using System.Text.RegularExpressions;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
     public class Game : GenericLibraryItem
     {
-        
         private Language language;
         private Platform platform;
         private NumberRange players;

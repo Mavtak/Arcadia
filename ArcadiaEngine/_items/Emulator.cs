@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using System.Xml;
-
 
 namespace SomewhatGeeky.Arcadia.Engine
 {

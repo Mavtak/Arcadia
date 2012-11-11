@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using System.Xml;
-using System.Threading;
 using System.Net;
-
+using System.Threading;
+using System.Xml;
 using SomewhatGeeky.UpdateChecker.Common;
 
 namespace SomewhatGeeky.UpdateChecker.Client

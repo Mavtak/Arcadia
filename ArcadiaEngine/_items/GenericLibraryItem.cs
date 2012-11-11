@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using System.Xml;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
     public class GenericLibraryItem : IComparable
     {
-        //private GenericLibraryItemCollection<GenericLibraryItem> parentCollection;
         private ArcadiaLibrary parentGameLibrary;
         private string name = null;
         private List<string> otherNames = new List<string>();
