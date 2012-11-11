@@ -177,6 +177,17 @@ namespace SomewhatGeeky.Arcadia.Engine
         }
 
         #endregion
+        
+        public IEnumerable<Game> ScanForNewGames()
+        {
+            foreach (var repository in Repositories)
+            {
+                foreach (var game in repository.ScanForNewGames())
+                {
+                    yield return game;
+                }
+            }
+        }
 
         #region add
 

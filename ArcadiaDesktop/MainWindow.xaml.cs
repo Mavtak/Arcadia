@@ -322,30 +322,26 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
             changeWindowTitle("Scanning...");
             int addedCount = 0;
-            foreach (Repository repository in library.Repositories)
+
+            try
             {
-                try
+                foreach (var game in library.ScanForNewGames())
                 {
-                    var addedGames = repository.ScanForNewGames();
+                    addedCount++;
 
-                    foreach (var game in addedGames)
+                    if(addedCount % 100 == 0)
                     {
-                        addedCount++;
-
-                        if(addedCount % 100 == 0)
-                        {
-                            changeWindowTitle("Scanning... added " + addedCount);
-                        }
+                        changeWindowTitle("Scanning... added " + addedCount);
                     }
                 }
-                catch (System.IO.DirectoryNotFoundException exc1)
-                {
-                    GuiCommon.ShowMessageBox(exc1.Message, MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-                catch (Exception exc2)
-                {
-                    GuiCommon.ShowCriticalErrorMessageBox(exc2);
-                }
+            }
+            catch (System.IO.DirectoryNotFoundException exc1)
+            {
+                GuiCommon.ShowMessageBox(exc1.Message, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            catch (Exception exc2)
+            {
+                GuiCommon.ShowCriticalErrorMessageBox(exc2);
             }
 
             if (addedCount == 0)
