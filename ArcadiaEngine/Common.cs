@@ -11,66 +11,62 @@ namespace SomewhatGeeky.Arcadia.Engine
         public static void WriteListOfStringsToXml(XmlWriter writer, IEnumerable<string> list, string nodeName, string childNodesName)
         {
             if (list == null)
+            {
                 return;
+            }
 
             writer.WriteStartElement(nodeName);
-            foreach (string member in list)
+            foreach (var member in list)
+            {
                 writer.WriteElementString(childNodesName, member);
+            }
+
             writer.WriteEndElement();
         }
 
         public static void ReadListOfStringsFromXml(XmlNode node, string childNodesName, ICollection<string> list)
         {
             if (node == null)
+            {
                 return;
+            }
 
             foreach (XmlNode otherNameNode in node.SelectNodes(childNodesName))
+            {
                 if (!String.IsNullOrEmpty(otherNameNode.InnerText))
+                {
                     list.Add(otherNameNode.InnerText);
+                }
+            }
         }
 
-        public static List<string> StringToList(string value)
+        public static IEnumerable<string> StringToList(string value)
         {
-            List<string> result = new List<string>();
-
             value = value.Replace(';', ',');
 
             foreach (string item in value.Split(','))
-                result.Add(item.Trim());
-
-            return result;
+            {
+                yield return item.Trim();
+            }
         }
 
         public static string ListToString(IEnumerable<string> items)
         {
-            StringBuilder result = new StringBuilder();
-            foreach(string item in items)
+            var result = new StringBuilder();
+            foreach (string item in items)
+            {
                 result.Append(item + ", ");
+            }
+
             if (result.Length <= 2)
+            {
                 return "";
+            }
+            
+            //TODO: use StringBuilder.Remove()
             return result.ToString(0,result.Length-2);
 
         }
-
-        //public static bool CheckStringIsInListOfStrings(string toCheck, string match1, List<string> otherMatches)
-        //{
-        //    if (toCheck.Equals(match1, StringComparison.InvariantCultureIgnoreCase))
-        //        return true;
-        //    foreach (string otherMatch in otherMatches)
-        //        if (toCheck.Equals(otherMatch, StringComparison.InvariantCultureIgnoreCase))
-        //            return true;
-        //    return false;
-        //}
-
-        //public static bool CheckStringEqualsStringOrListOfStrings(string toCheck, string match1, List<string> otherMatches)
-        //{
-        //    if (toCheck.Equals(match1, StringComparison.InvariantCultureIgnoreCase))
-        //        return true;
-        //    foreach (string otherMatch in otherMatches)
-        //        if (toCheck.Equals(otherMatch, StringComparison.InvariantCultureIgnoreCase))
-        //            return true;
-        //    return false;
-        //}
 
         public static string MakeRelativePath(string path)
         {

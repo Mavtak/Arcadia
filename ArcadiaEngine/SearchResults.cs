@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
@@ -20,48 +18,49 @@ namespace SomewhatGeeky.Arcadia.Engine
         private static bool gameMatchesWord(Game game, string word)
         {
             if (game.Name != null && game.Name.ToLower().Contains(word))
+            {
                 return true;
+            }
+
             if (game.Platform != null && game.Platform.NameMatches(word))
+            {
                 return true;
+            }
+
             if (game.InnerPath != null && game.InnerPath.ToLower().Contains(word))
+            {
                 return true;
+            }
 
             return false;
         }
 
-        private static bool gameMatches(Game game, string [] queryWords)
+        private static bool gameMatches(Game game, IEnumerable<string> queryWords)
         {
-            foreach (string queryWord in queryWords)
-            {
-                if (!gameMatchesWord(game, queryWord))
-                    return false;
-            }
-            return true;
+            var result = queryWords.All(word => gameMatchesWord(game, word));
+
+            return result;
         }
 
-
-        System.Collections.Generic.IEnumerator<Game> System.Collections.Generic.IEnumerable<Game>.GetEnumerator()
+        IEnumerator<Game> IEnumerable<Game>.GetEnumerator()
         {
-            string[] queryWords = query.ToLower().Split(' ');
-            bool matches;
+            var queryWords = query.ToLower().Split(' ');
 
             lock (library.Games)
             {
                 foreach (Game game in library.Games)
                 {
-                    if(gameMatches(game, queryWords))
+                    if (gameMatches(game, queryWords))
+                    {
                         yield return game;
+                    }
                 }
             }
-
-            yield break;
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            foreach (Game game in (IEnumerable<Game>)this)
-                yield return game;
-            yield break;
+            return ((IEnumerable<Game>)this).GetEnumerator();
         }
     }
 }

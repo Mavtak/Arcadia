@@ -14,7 +14,6 @@ namespace SomewhatGeeky.Arcadia.Engine
             this.library = library;
         }
 
-
         public SearchResults Search(string query)
         {
             return new SearchResults(library, query);
