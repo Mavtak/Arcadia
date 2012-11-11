@@ -16,15 +16,16 @@ namespace SomewhatGeeky.Arcadia.Engine
             ParentGameLibrary = parentGameLibrary;
             items = new List<TItemType>();
         }
+
         public GenericLibraryItemCollection()
             : this(null)
-        {
-        }
+        {  }
 
 
         #region XML code
 
         #region writing
+
         public void WriteToXml(XmlWriter writer, string collectionNodeName)
         {
             this.Sort();
@@ -38,10 +39,12 @@ namespace SomewhatGeeky.Arcadia.Engine
 
             writer.WriteEndElement();
         }
+
         public void WriteToXml(XmlWriter writer)
         {
             WriteToXml(writer, DefaultXmlNodeName);
         }
+
         protected virtual void writeToXmlExtension(XmlWriter writer)
         {
 
@@ -75,15 +78,18 @@ namespace SomewhatGeeky.Arcadia.Engine
         #endregion
 
         #region nameing
+
         public string DefaultXmlNodeName
         {
             get
             {
-                string fullName = this.GetType().FullName;
-                string lastPart = fullName.Substring(fullName.LastIndexOf(".") + 1);
-                return lastPart.Substring(0, 1).ToLower() + lastPart.Substring(1);
+                var result = this.GetType().Name;
+                result = result.Substring(0, 1).ToLower() + result.Substring(1);
+
+                return result;
             }
         }
+
         public string DefaultXmlChildNodeName
         {
             get
@@ -91,6 +97,7 @@ namespace SomewhatGeeky.Arcadia.Engine
                 return DefaultXmlNodeName.Replace("Collection", "");
             }
         }
+
         #endregion
 
         #endregion
