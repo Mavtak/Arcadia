@@ -16,6 +16,7 @@ namespace SomewhatGeeky.Arcadia.Engine
         public PlatformCollection Platforms { get; private set; }
         public RepositoryCollection Repositories { get; private set; }
         public LibrarySearcher Searcher { get; private set; }
+        internal IdGenerator IdGenerator { get; private set; }
 
         public ArcadiaLibrary()
         {
@@ -25,6 +26,7 @@ namespace SomewhatGeeky.Arcadia.Engine
             Platforms = new PlatformCollection(this);
             Repositories = new RepositoryCollection(this);
             Searcher = new LibrarySearcher(this);
+            IdGenerator = new IdGenerator();
         }
 
         public override string ToString()

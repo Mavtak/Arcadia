@@ -8,8 +8,6 @@ namespace SomewhatGeeky.Arcadia.Engine
 {
     public static class Common
     {
-        private static IdGenerator idGenerator = new IdGenerator();
-
         public static void WriteListOfStringsToXml(XmlWriter writer, IEnumerable<string> list, string nodeName, string childNodesName)
         {
             if (list == null)
@@ -29,14 +27,6 @@ namespace SomewhatGeeky.Arcadia.Engine
             foreach (XmlNode otherNameNode in node.SelectNodes(childNodesName))
                 if (!String.IsNullOrEmpty(otherNameNode.InnerText))
                     list.Add(otherNameNode.InnerText);
-        }
-
-        public static IdGenerator IdGenerator
-        {
-            get
-            {
-                return idGenerator;
-            }
         }
 
         public static List<string> StringToList(string value)

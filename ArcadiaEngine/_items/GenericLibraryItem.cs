@@ -212,7 +212,10 @@ namespace SomewhatGeeky.Arcadia.Engine
             get
             {
                 if (!IdIsSet)
-                    id = Common.IdGenerator.NextString();
+                {
+                    id = ParentGameLibrary.IdGenerator.NextString();
+                }
+
                 return id;
             }
         }
