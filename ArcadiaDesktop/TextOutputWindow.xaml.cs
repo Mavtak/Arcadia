@@ -28,7 +28,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         public static void ShowTextDialog(Window owner, string title, string text)
         {
-            TextOutputWindow dialog = new TextOutputWindow(owner, title, text);
+            var dialog = new TextOutputWindow(owner, title, text);
             dialog.ShowDialog();
         }
 

@@ -27,14 +27,14 @@ namespace SomewhatGeeky.Arcadia.Desktop
     {
         
 
-        private Arcadia.Engine.ArcadiaLibrary library = new Arcadia.Engine.ArcadiaLibrary();
+        private ArcadiaLibrary library = new ArcadiaLibrary();
         private UpdaterClient updateChecker = new UpdaterClient(new string[] { "http://arcadia.SomewhatGeeky.com/update/", "http://arcadia.SomewhatGeeky.com/updates/", "http://update.SomewhatGeeky.com/", "http://updates.SomewhatGeeky.com/" }, "Arcadia Desktop", GuiCommon.Version, false);
 
         #region load and close code
         public MainWindow()
         {
             InitializeComponent();
-            changeWindowTitle("");
+            changeWindowTitle();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -85,7 +85,9 @@ namespace SomewhatGeeky.Arcadia.Desktop
             try
             {
                 if (System.IO.File.Exists(DataFilePath))
+                {
                     library.ReadFromFile(DataFilePath);
+                }
                 else
                 {
                     library.LoadDefaultSettings();
@@ -177,7 +179,6 @@ namespace SomewhatGeeky.Arcadia.Desktop
                 Dispatcher.BeginInvoke(new ParameterlessDelegate(updateSearch), null);
                 return;
             }
-
            
             gameList.ItemsSource = library.Searcher.Search(searchBox.Text);
             changeWindowTitle("Displaying " + gameList.Items.Count);
@@ -187,21 +188,8 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             updateSearch();
         }
+
         #endregion
-
-        private void addGamesToList(List<Game> games)
-        {
-            if (Dispatcher.Thread != System.Threading.Thread.CurrentThread)
-            {
-                Dispatcher.BeginInvoke(new ListOfGamesDelegate(addGamesToList), new object[] { games });
-                return;
-            }
-
-            foreach (Game game in games)
-                gameList.Items.Add(game);
-        }
-
-        
 
         private void EditRepositoriesMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -303,8 +291,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             if (library.Repositories.Count == 0)
             {
-                GuiCommon.ShowMessageBox("You haven't told Arcadia where your games are.", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                EditRepositoriesMenuItem_Click(sender, null);
+                showAddRepositoriesSuggestion(true);
                 return;
             }
 
@@ -345,28 +332,36 @@ namespace SomewhatGeeky.Arcadia.Desktop
             }
 
             if (addedCount == 0)
+            {
                 changeWindowTitle("No games found.");
+            }
             else if (addedCount == 1)
+            {
                 changeWindowTitle("1 game found");
+            }
             else
+            {
                 changeWindowTitle(addedCount + " games found.");
+            }
 
             updateSearch();
-
         }
 
         private void checkLibraryMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            List<string> messages = new List<string>();
+            var messages = new List<string>();
 
             //TODO: lots sanity checks
-            //foreach (GenericLibraryItem item in library)
-            //{
-            //    if(item.ParentGameLibrary != library)
-            //        messages.Add("parent ArcadiaLibrary for the " + item.GetType() + " is not set properly. (it's value is " + game.ParentGameLibrary + ")");
-            //}
 
-            foreach (Game game in library.Games)
+            foreach (var item in library.AllItems)
+            {
+                if (item.ParentGameLibrary != library)
+                {
+                    messages.Add("parent ArcadiaLibrary for the " + item.GetType() + " is not set properly. (it's value is " + item.ParentGameLibrary + ")");
+                }
+            }
+
+            foreach (var game in library.Games)
             {
                 if (game.Repository == null)
                 {
@@ -388,8 +383,10 @@ namespace SomewhatGeeky.Arcadia.Desktop
             StringBuilder builder = new StringBuilder();
             builder.Append("I found some problems. :-(");
             foreach (string message in messages)
-                builder.Append("\n\n" + message);
-
+            {
+                builder.Append("\n\n");
+                builder.Append(message);
+            }
 
             TextOutputWindow.ShowTextDialog(this, "Library Sanity Check Results", builder.ToString());
         }
@@ -399,18 +396,26 @@ namespace SomewhatGeeky.Arcadia.Desktop
             showAboutWindow();
         }
 
-        private void changeWindowTitle(string text)
+        private void changeWindowTitle(string text = null)
         {
             if (Dispatcher.Thread != System.Threading.Thread.CurrentThread)
             {
-                Dispatcher.BeginInvoke(new StringDelegate(changeWindowTitle), new object[] { text });
+                Dispatcher.BeginInvoke(new StringDelegate(changeWindowTitle), text);
                 return;
             }
 
-            if(String.IsNullOrEmpty(text))
-                Title = GuiCommon.MainWindowBaseTitle;
-            else
-                Title = GuiCommon.MainWindowBaseTitle + " (" + text + ")";
+            var builder = new StringBuilder();
+
+            builder.Append(GuiCommon.MainWindowBaseTitle);
+
+            if (!String.IsNullOrEmpty(text))
+            {
+                builder.Append(" (");
+                builder.Append(text);
+                builder.Append(")");
+            }
+
+            Title = builder.ToString();
         }
 
         private void showAboutWindow()
@@ -438,10 +443,12 @@ namespace SomewhatGeeky.Arcadia.Desktop
             dialog.ShowDialog();
         }
 
-        private void showAddRepositoriesSuggestion()
+        private void showAddRepositoriesSuggestion(bool autoScan)
         {
             if (library.Repositories.Count > 0)
+            {
                 return;
+            }
 
             //ensure that this method is executed in the main thread
             if (Dispatcher.Thread != System.Threading.Thread.CurrentThread)
@@ -454,11 +461,17 @@ namespace SomewhatGeeky.Arcadia.Desktop
             {
                 EditRepositoriesMenuItem_Click(null, null);
 
-                if (library.Repositories.Count > 0 && GuiCommon.ShowMessageBox("When you want Arcadia to scan for new ROMs, click \"Settings and Tools\" and then \"Scan For ROMs\".\nDo you want to scan now?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (library.Repositories.Count > 0
+                    && (autoScan || GuiCommon.ShowMessageBox("When you want Arcadia to scan for new ROMs, click \"Settings and Tools\" and then \"Scan For ROMs\".\nDo you want to scan now?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes))
                 {
                     scanAsync();
                 }
             }
+        }
+
+        private void showAddRepositoriesSuggestion()
+        {
+            showAddRepositoriesSuggestion(false);
         }
         
     }
