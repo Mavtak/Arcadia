@@ -130,11 +130,15 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         public IEnumerable<Game> ScanForNewGames()
         {
-            foreach (var repository in Repositories)
+            lock (Games)
             {
-                foreach (var game in repository.ScanForNewGames())
+                var results = from repository in Repositories
+                              from game in repository.ScanForNewGames()
+                              select game;
+
+                foreach (var result in results)
                 {
-                    yield return game;
+                    yield return result;
                 }
             }
         }

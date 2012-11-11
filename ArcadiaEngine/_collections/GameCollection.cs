@@ -15,16 +15,22 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         public override void Add(Game item)
         {
-            paths.Add(item.FullPath);
+            lock (this)
+            {
+                paths.Add(item.FullPath);
 
-            base.Add(item);
+                base.Add(item);
+            }
         }
 
         public override bool Remove(Game item)
         {
-            paths.Remove(item.FullPath);
+            lock (this)
+            {
+                paths.Remove(item.FullPath);
 
-            return base.Remove(item);
+                return base.Remove(item);
+            }
         }
 
         public bool ContainsPath(string path)

@@ -48,12 +48,13 @@ namespace SomewhatGeeky.Arcadia.Engine
 
             lock (library.Games)
             {
-                foreach (Game game in library.Games)
+                var results = from game in library.Games
+                              where gameMatches(game, queryWords)
+                              select game;
+
+                foreach (var result in results)
                 {
-                    if (gameMatches(game, queryWords))
-                    {
-                        yield return game;
-                    }
+                    yield return result;
                 }
             }
         }
