@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using System.Xml;
+using System.IO;
 namespace SomewhatGeeky.Arcadia.Engine
 {
     public static class Common
@@ -76,6 +77,31 @@ namespace SomewhatGeeky.Arcadia.Engine
                 return "." + System.IO.Path.DirectorySeparatorChar + path.Substring(AppDomain.CurrentDomain.BaseDirectory.Length);
             }
             return path;
+        }
+
+        public static IEnumerable<string> GetFiles(string startingDirectory)
+        {
+            var stack = new Stack<string>();
+            stack.Push(startingDirectory);
+
+            while (stack.Any())
+            {
+                var directory = stack.Pop();
+
+                var subdirectories = Directory.GetDirectories(directory);
+                foreach (var subdirectory in subdirectories)
+                {
+                    stack.Push(subdirectory);
+                }
+
+                var files = Directory.GetFiles(directory);
+                foreach (var file in files)
+                {
+                    yield return file;
+                }
+
+            }
+
         }
 
         public static string ContactEmail

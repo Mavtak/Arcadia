@@ -130,7 +130,7 @@ namespace SomewhatGeeky.Arcadia.Engine
                 throw new Exception("Can't scan for games in the \"" + Name + "\" repository.");
             }
 
-            var files = Directory.GetFiles(RootPath, "*", System.IO.SearchOption.AllDirectories);
+            var files = Common.GetFiles(RootPath);
 
             foreach (var filePath in files)
             {
