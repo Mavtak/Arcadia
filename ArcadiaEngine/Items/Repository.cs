@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SomewhatGeeky.Arcadia.Engine
+namespace SomewhatGeeky.Arcadia.Engine.Items
 {
     public class Repository : GenericLibraryItem
     {

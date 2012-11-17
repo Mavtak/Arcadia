@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace SomewhatGeeky.Arcadia.Engine
+namespace SomewhatGeeky.Arcadia.Engine.Items
 {
     public class GenericLibraryItem : IComparable
     {

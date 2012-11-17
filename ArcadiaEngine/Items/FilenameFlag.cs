@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SomewhatGeeky.Arcadia.Engine
+namespace SomewhatGeeky.Arcadia.Engine.Items
 {
     public class FilenameFlag : GenericLibraryItem
     {

@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Windows;
 using SomewhatGeeky.Arcadia.Engine;
+using SomewhatGeeky.Arcadia.Engine.Items;
 
 namespace SomewhatGeeky.Arcadia.Desktop
 {

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 
-namespace SomewhatGeeky.Arcadia.Engine
+namespace SomewhatGeeky.Arcadia.Engine.Items
 {
     public class Emulator : GenericLibraryItem
     {

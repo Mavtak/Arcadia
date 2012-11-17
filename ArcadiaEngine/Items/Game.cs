@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SomewhatGeeky.Arcadia.Engine
+namespace SomewhatGeeky.Arcadia.Engine.Items
 {
     public class Game : GenericLibraryItem
     {

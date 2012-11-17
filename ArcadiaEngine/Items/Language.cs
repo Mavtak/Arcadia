@@ -1,5 +1,5 @@
 ﻿
-namespace SomewhatGeeky.Arcadia.Engine
+namespace SomewhatGeeky.Arcadia.Engine.Items
 {
     public class Language : GenericLibraryItem, IFilterItem
     {

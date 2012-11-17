@@ -1,5 +1,6 @@
 ﻿using System;
 using SomewhatGeeky.Arcadia.Engine;
+using SomewhatGeeky.Arcadia.Engine.Items;
 
 namespace SomewhatGeeky.Arcadia.Cli
 {

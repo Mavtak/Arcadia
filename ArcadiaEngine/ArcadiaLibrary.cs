@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using System.Xml;
+using SomewhatGeeky.Arcadia.Engine.Items;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {

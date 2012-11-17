@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using SomewhatGeeky.Arcadia.Engine.Items;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
