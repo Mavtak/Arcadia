@@ -29,7 +29,8 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         public PlatformEditorWindow(Window owner)
             : this(owner, new Platform())
-        { }
+        {
+        }
 
         public Platform Result
         {

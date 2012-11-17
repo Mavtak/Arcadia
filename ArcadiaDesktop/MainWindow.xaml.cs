@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Xml;
 using SomewhatGeeky.Arcadia.Engine;
 using SomewhatGeeky.Arcadia.Engine.Items;
 using SomewhatGeeky.UpdateChecker.Client;
@@ -70,9 +73,9 @@ namespace SomewhatGeeky.Arcadia.Desktop
         private void loadDataFile()
         {
             //runs this method in a thread other than the main thread
-            if (Dispatcher.Thread == System.Threading.Thread.CurrentThread)
+            if (Dispatcher.Thread == Thread.CurrentThread)
             {
-                System.Threading.Thread newThread = new System.Threading.Thread(new System.Threading.ThreadStart(loadDataFile));
+                var newThread = new Thread(new System.Threading.ThreadStart(loadDataFile));
                 newThread.Start();
                 return;
             }
@@ -114,7 +117,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             get
             {
-                return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Arcadia.xml");
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Arcadia.xml");
             }
         }
         #endregion
@@ -123,7 +126,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
         void updateChecker_UpdateCheckFailed(object sender, EventArgs eventArgs)
         {
             //ensures that this thread runs in the main thread.
-            if (Dispatcher.Thread != System.Threading.Thread.CurrentThread)
+            if (Dispatcher.Thread != Thread.CurrentThread)
             {
                 Dispatcher.BeginInvoke(new UpdateCheckFailedEventHandler(updateChecker_UpdateCheckFailed), new object[] { sender, eventArgs });
                 return;
@@ -134,7 +137,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         void updateChecker_UpdateFound(object sender, UpdatesFoundEventArgs eventArgs)
         {
-            if (Dispatcher.Thread != System.Threading.Thread.CurrentThread)
+            if (Dispatcher.Thread != Thread.CurrentThread)
             {
                 Dispatcher.BeginInvoke(new UpdatesFoundEventHandler(updateChecker_UpdateFound), new object[] { sender, eventArgs });
                 return;
@@ -142,7 +145,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
             foreach (SomewhatGeeky.UpdateChecker.Common.Update update in eventArgs.Updates)
             {
-                TextOutputWindow dialog = new TextOutputWindow(this, "Update available",
+                var dialog = new TextOutputWindow(this, "Update available",
                     "Name: " + (update.ProjectName ?? "unknown")
                     + "\nVersion: " + ((update.Version != null) ? (update.Version.ToString()) : ("unknown"))
                     + "\nStable: " + ((update.Stable != null) ? (update.Stable.ToString()) : ("unknown"))
@@ -156,6 +159,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
         #endregion
 
         #region search code
+
         private void searchButton_Click(object sender, RoutedEventArgs e)
         {
             updateSearch();
@@ -169,7 +173,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
         private void updateSearch()
         {
             //ensures that this method executes in the main thread.
-            if (Dispatcher.Thread != System.Threading.Thread.CurrentThread)
+            if (Dispatcher.Thread != Thread.CurrentThread)
             {
                 Dispatcher.BeginInvoke(new ParameterlessDelegate(updateSearch), null);
                 return;
@@ -188,7 +192,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void EditRepositoriesMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            RepositoryListWindow window = new RepositoryListWindow(this, library.Repositories);
+            var window = new RepositoryListWindow(this, library.Repositories);
             window.ShowDialog();
 
             updateSearch();
@@ -196,13 +200,13 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void editPlatformsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            PlatformListWindow window = new PlatformListWindow(this, library.Platforms);
+            var window = new PlatformListWindow(this, library.Platforms);
             window.ShowDialog();
         }
 
         private void EditEmulatorsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            EmulatorListWindow window = new EmulatorListWindow(this, library.Emulators);
+            var window = new EmulatorListWindow(this, library.Emulators);
             window.ShowDialog();
         }
 
@@ -222,15 +226,20 @@ namespace SomewhatGeeky.Arcadia.Desktop
             get
             {
                 if (gameList.SelectedItems.Count != 1)
+                {
                     return null;
-                return (Game)(gameList.SelectedItem);
+                }
+
+                return gameList.SelectedItem as Game;
             }
         }
 
         private void gameList_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
+            {
                 playGame(SelectedGame);
+            }
         }     
         private void gameList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -241,7 +250,9 @@ namespace SomewhatGeeky.Arcadia.Desktop
         private void playGame(Game game)
         {
             if (game == null)
+            {
                 return;
+            }
 
             Emulator emulator = null;
             var emulatorOptions = library.Emulators.GetEmulatorChoices(game.Platform).ToList();
@@ -256,28 +267,30 @@ namespace SomewhatGeeky.Arcadia.Desktop
                 if (emulatorOptions.Count == 0)
                     emulatorOptions = library.Emulators.ToList();
 
-                EmulatorSelectorWindow dialog = new EmulatorSelectorWindow(this, library.Emulators, emulatorOptions);
+                var dialog = new EmulatorSelectorWindow(this, library.Emulators, emulatorOptions);
                 dialog.ShowDialog();
 
                 emulator = dialog.Result;
             }
 
             if (emulator == null)
+            {
                 return;
+            }
 
             emulator.OpenGame(game);
         }
 
         private void produceDefaultSettingsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder builder = new StringBuilder();
-            System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(builder);
+            var builder = new StringBuilder();
+            XmlWriter writer = XmlWriter.Create(builder);
 
             library.WriteDefaultSettings(writer);
 
             writer.Close();
 
-            TextOutputWindow window = new TextOutputWindow(this, "Default Settings as XML", builder.ToString());
+            var window = new TextOutputWindow(this, "Default Settings as XML", builder.ToString());
 
             window.Show();
         }
@@ -375,7 +388,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
                 return;
             }
 
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             builder.Append("I found some problems. :-(");
             foreach (string message in messages)
             {
@@ -393,7 +406,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void changeWindowTitle(string text = null)
         {
-            if (Dispatcher.Thread != System.Threading.Thread.CurrentThread)
+            if (Dispatcher.Thread != Thread.CurrentThread)
             {
                 Dispatcher.BeginInvoke(new StringDelegate(changeWindowTitle), text);
                 return;
@@ -416,13 +429,13 @@ namespace SomewhatGeeky.Arcadia.Desktop
         private void showAboutWindow()
         {
             //ensure that this method is executed in the main thread
-            if (Dispatcher.Thread != System.Threading.Thread.CurrentThread)
+            if (Dispatcher.Thread != Thread.CurrentThread)
             {
                 Dispatcher.Invoke(new ParameterlessDelegate(showAboutWindow), null);
                 return;
             }
 
-            TextOutputWindow dialog = new TextOutputWindow(this, GuiCommon.MainWindowBaseTitle,
+            var dialog = new TextOutputWindow(this, GuiCommon.MainWindowBaseTitle,
                     "Welcome to " + GuiCommon.MainWindowBaseTitle + "!"
                     + "\n"
                     + "\n        Arcadia is an emulator frontend that manages a wide variety of classic gaming system files.  I design it to be as configurable as the users want and yet still be easy to use right for the first time.  Going forward I hope to build an online community around Arcadia where users can share game ratings, reviews, links, and game saves.  I also hope to incorporate Arcadia into social networking websites like Facebook and Twitter.  All of this is purely for my own recreation, so I hope you guys are patient with me, and as excited as I am!"
@@ -446,7 +459,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             }
 
             //ensure that this method is executed in the main thread
-            if (Dispatcher.Thread != System.Threading.Thread.CurrentThread)
+            if (Dispatcher.Thread != Thread.CurrentThread)
             {
                 Dispatcher.BeginInvoke(new ParameterlessDelegate(showAddRepositoriesSuggestion), null);
                 return;

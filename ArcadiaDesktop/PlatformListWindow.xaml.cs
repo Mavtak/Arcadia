@@ -28,10 +28,12 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void newButton_Click(object sender, RoutedEventArgs e)
         {
-            PlatformEditorWindow window = new PlatformEditorWindow(this);
+            var window = new PlatformEditorWindow(this);
             window.ShowDialog();
             if (window.Result == null)
+            {
                 return;
+            }
 
             collection.Add(window.Result);
             itemList.Items.Refresh();
@@ -39,10 +41,13 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
-            Platform item = (Platform)(itemList.SelectedItem);
+            var item = itemList.SelectedItem as Platform;
             if (item == null)
+            {
                 throw new Exception("David, lazy programming fail!");
-            PlatformEditorWindow window = new PlatformEditorWindow(this, item);
+            }
+
+            var window = new PlatformEditorWindow(this, item);
             window.ShowDialog();
             itemList.Items.Refresh();
         }
@@ -53,6 +58,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             {
                 collection.Remove(platform);
             }
+
             itemList.Items.Refresh();
         }
 
@@ -64,14 +70,17 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void itemList_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter
-                && itemList.SelectedItems.Count == 1)
+            if (e.Key == Key.Enter && itemList.SelectedItems.Count == 1)
+            {
                 editButton_Click(sender, null);
+            }
         }
         private void itemList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (itemList.SelectedItems.Count == 1)
+            {
                 editButton_Click(sender, null);
+            }
         }
     }
 }

@@ -70,8 +70,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void itemList_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter
-                && itemList.SelectedItems.Count == 1)
+            if (e.Key == Key.Enter && itemList.SelectedItems.Count == 1)
             {
                 editButton_Click(sender, null);
             }
