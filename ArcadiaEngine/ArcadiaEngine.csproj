@@ -67,20 +67,20 @@
     <Compile Include="SearchResults.cs" />
     <Compile Include="SimpleSearchFilter.cs" />
     <Compile Include="InternalLibraryVersion.cs" />
-    <Compile Include="_collections\EmulatorCollection.cs" />
-    <Compile Include="_collections\LanguageCollection.cs" />
-    <Compile Include="_collections\RepositoryCollection.cs" />
-    <Compile Include="_collections\GameCollection.cs" />
-    <Compile Include="_items\FilenameFlag.cs" />
-    <Compile Include="_items\Emulator.cs" />
-    <Compile Include="_items\Game.cs" />
-    <Compile Include="_items\Language.cs" />
-    <Compile Include="_items\GenericLibraryItem.cs" />
-    <Compile Include="_collections\GenericLibraryItemCollection.cs" />
-    <Compile Include="_collections\PlatformCollection.cs" />
-    <Compile Include="_items\Platform.cs" />
+    <Compile Include="Collections\EmulatorCollection.cs" />
+    <Compile Include="Collections\LanguageCollection.cs" />
+    <Compile Include="Collections\RepositoryCollection.cs" />
+    <Compile Include="Collections\GameCollection.cs" />
+    <Compile Include="Items\FilenameFlag.cs" />
+    <Compile Include="Items\Emulator.cs" />
+    <Compile Include="Items\Game.cs" />
+    <Compile Include="Items\Language.cs" />
+    <Compile Include="Items\GenericLibraryItem.cs" />
+    <Compile Include="Collections\GenericLibraryItemCollection.cs" />
+    <Compile Include="Collections\PlatformCollection.cs" />
+    <Compile Include="Items\Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_items\Repository.cs" />
+    <Compile Include="Items\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
