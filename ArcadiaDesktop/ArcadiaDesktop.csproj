@@ -163,6 +163,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmulatorEditorMessageBoxGenerator.cs" />
     <Compile Include="EmulatorEditorWindow.xaml.cs">
       <DependentUpon>EmulatorEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -180,6 +181,8 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindowMessageBoxGenerator.cs" />
+    <Compile Include="MessageBoxGenerator.cs" />
     <Compile Include="PlatformEditorWindow.xaml.cs">
       <DependentUpon>PlatformEditorWindow.xaml</DependentUpon>
     </Compile>

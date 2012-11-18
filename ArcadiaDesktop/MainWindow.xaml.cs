@@ -23,8 +23,6 @@ namespace SomewhatGeeky.Arcadia.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-
         private ArcadiaLibrary library = new ArcadiaLibrary();
         private UpdaterClient updateChecker = new UpdaterClient(new string[] { "http://arcadia.SomewhatGeeky.com/update/", "http://arcadia.SomewhatGeeky.com/updates/", "http://update.SomewhatGeeky.com/", "http://updates.SomewhatGeeky.com/" }, "Arcadia Desktop", GuiCommon.Version, false);
 
@@ -55,7 +53,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             }
             catch(Exception exc)
             {
-                GuiCommon.ShowCriticalErrorMessageBox(exc);
+                MessageBoxGenerator.ShowCriticalErrorMessageBox(exc);
                 die();
             }
         }
@@ -99,12 +97,12 @@ namespace SomewhatGeeky.Arcadia.Desktop
             }
             catch (System.IO.IOException)
             {
-                MessageBoxes.ShowErrorLoadingDataFileError();
+                MainWindowMessageBoxGenerator.ShowErrorLoadingDataFileError();
                 die();
             }
             catch (Exception exc)
             {
-                GuiCommon.ShowCriticalErrorMessageBox(exc);
+                MessageBoxGenerator.ShowCriticalErrorMessageBox(exc);
                 die();
             }
         }
@@ -335,11 +333,11 @@ namespace SomewhatGeeky.Arcadia.Desktop
             }
             catch (System.IO.DirectoryNotFoundException exc1)
             {
-                MessageBoxes.ShowScanningError(exc1);
+                MainWindowMessageBoxGenerator.ShowScanningError(exc1);
             }
             catch (Exception exc2)
             {
-                GuiCommon.ShowCriticalErrorMessageBox(exc2);
+                MessageBoxGenerator.ShowCriticalErrorMessageBox(exc2);
             }
 
             if (addedCount == 0)
@@ -387,7 +385,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
             if (messages.Count == 0)
             {
-                MessageBoxes.ShowNoProblemsMessage();
+                MainWindowMessageBoxGenerator.ShowNoProblemsMessage();
                 return;
             }
 
@@ -457,11 +455,11 @@ namespace SomewhatGeeky.Arcadia.Desktop
                 return;
             }
 
-            if (MessageBoxes.ShowNoRepositoriesMessage() == MessageBoxResult.OK)
+            if (MainWindowMessageBoxGenerator.ShowNoRepositoriesMessage() == MessageBoxResult.OK)
             {
                 EditRepositoriesMenuItem_Click(null, null);
 
-                if (library.Repositories.Count > 0 && (autoScan || MessageBoxes.ShouldScanForRoms() == MessageBoxResult.Yes))
+                if (library.Repositories.Count > 0 && (autoScan || MainWindowMessageBoxGenerator.ShouldScanForRoms() == MessageBoxResult.Yes))
                 {
                     scanAsync();
                 }

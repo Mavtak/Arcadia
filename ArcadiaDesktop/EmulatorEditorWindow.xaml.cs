@@ -67,7 +67,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             if (!string.IsNullOrEmpty(argumentPatternBox.Text)
                 && !argumentPatternBox.Text.Contains(Emulator.ArgumentPatternFileVariable))
             {
-                MessageBoxes.ShowEmulatorArgumentPatternError();
+                EmulatorEditorMessageBoxGenerator.ShowEmulatorArgumentPatternError();
                 e.Handled = true;
                 return;
             }
@@ -111,12 +111,12 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void argumentPatternHelpLink_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxes.ShowEmulatorArgumentPatternHelp();
+            EmulatorEditorMessageBoxGenerator.ShowEmulatorArgumentPatternHelp();
         }
 
         private void platformsHelpLink_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxes.ShowEmulatorPlatformHelp();
+            EmulatorEditorMessageBoxGenerator.ShowEmulatorPlatformHelp();
         }
     }
 }
