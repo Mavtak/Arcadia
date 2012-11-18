@@ -10,7 +10,7 @@ namespace SomewhatGeeky.UpdateChecker.Common
         internal static Version GetLibraryVersion()
         {
             //automatically incremented by build script
-            return new Version("1.0.90.0");
+            return new Version("1.3.0.0");
         }
     }
 }

@@ -12,7 +12,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             get
             {
-                return "Arcadia Preview 2";
+                return "Arcadia Preview 3";
             }
         }
         public static MessageBoxResult ShowMessageBox(string message, MessageBoxButton button, MessageBoxImage image)
@@ -38,6 +38,14 @@ namespace SomewhatGeeky.Arcadia.Desktop
             {
                 return InternalLibraryVersion.GetLibraryVersion();
                 //System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
+            }
+        }
+
+        public static DateTime? BuildTime
+        {
+            get
+            {
+                return InternalLibraryVersion.LastBuildTime;
             }
         }
 

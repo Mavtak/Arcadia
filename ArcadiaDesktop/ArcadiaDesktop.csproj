@@ -284,7 +284,8 @@
   -->
   <PropertyGroup>
     <PreBuildEvent>Powershell -File "$(SolutionDir)Scripts\Increment-Build-Number.ps1" "$(ProjectDir)Properties\AssemblyInfo.cs"
-Powershell -File "$(SolutionDir)Scripts\Increment-Build-Number.ps1" "$(ProjectDir)InternalLibraryVersion.cs"</PreBuildEvent>
+Powershell -File "$(SolutionDir)Scripts\Increment-Build-Number.ps1" "$(ProjectDir)InternalLibraryVersion.cs"
+Powershell -File "$(SolutionDir)Scripts\Set-BuildTime.ps1" "$(ProjectDir)InternalLibraryVersion.cs"</PreBuildEvent>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>

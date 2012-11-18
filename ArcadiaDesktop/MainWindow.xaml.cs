@@ -448,9 +448,10 @@ namespace SomewhatGeeky.Arcadia.Desktop
                     + "\nThanks,"
                     + "\nDavid McGrath"
                     + "\n\n"
-                    + "\n Arcadia.Desktop Version: " + GuiCommon.Version
-                    + "\n Arcadia.Engine Version: " + Arcadia.Engine.Common.LibraryVersion
+                    + "\n Arcadia.Desktop Version: " + GuiCommon.Version + " (built " + (GuiCommon.BuildTime.HasValue?GuiCommon.BuildTime.ToString():"unknown") + ")"
+                    + "\n Arcadia.Engine Version: " + Arcadia.Engine.Common.LibraryVersion + " (built " + (Arcadia.Engine.Common.BuildTime.HasValue?Arcadia.Engine.Common.BuildTime.ToString():"unknown") + ")"
                     );
+
             dialog.ShowDialog();
         }
 

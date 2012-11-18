@@ -92,5 +92,13 @@ namespace SomewhatGeeky.Arcadia.Engine
                 return InternalLibraryVersion.GetLibraryVersion(); 
             }
         }
+
+        public static DateTime? BuildTime
+        {
+            get
+            {
+                return InternalLibraryVersion.LastBuildTime;
+            }
+        }
     }
 }
