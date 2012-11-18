@@ -99,7 +99,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             }
             catch (System.IO.IOException)
             {
-                GuiCommon.ShowMessageBox("Oops!  There was an error loading the data file.  Am I on a read-only file location?", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBoxes.ShowErrorLoadingDataFileError();
                 die();
             }
             catch (Exception exc)
@@ -335,7 +335,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             }
             catch (System.IO.DirectoryNotFoundException exc1)
             {
-                GuiCommon.ShowMessageBox(exc1.Message, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBoxes.ShowScanningError(exc1);
             }
             catch (Exception exc2)
             {
@@ -387,7 +387,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
             if (messages.Count == 0)
             {
-                GuiCommon.ShowMessageBox("no problems! :-)");
+                MessageBoxes.ShowNoProblemsMessage();
                 return;
             }
 
@@ -457,12 +457,11 @@ namespace SomewhatGeeky.Arcadia.Desktop
                 return;
             }
 
-            if (GuiCommon.ShowMessageBox("It looks like you don't have any repositories set.\nHow about you tell me where your ROMs and things are?", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+            if (MessageBoxes.ShowNoRepositoriesMessage() == MessageBoxResult.OK)
             {
                 EditRepositoriesMenuItem_Click(null, null);
 
-                if (library.Repositories.Count > 0
-                    && (autoScan || GuiCommon.ShowMessageBox("When you want Arcadia to scan for new ROMs, click \"Settings and Tools\" and then \"Scan For ROMs\".\nDo you want to scan now?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes))
+                if (library.Repositories.Count > 0 && (autoScan || MessageBoxes.ShouldScanForRoms() == MessageBoxResult.Yes))
                 {
                     scanAsync();
                 }

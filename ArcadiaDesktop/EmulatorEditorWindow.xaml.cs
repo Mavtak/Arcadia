@@ -67,7 +67,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
             if (!string.IsNullOrEmpty(argumentPatternBox.Text)
                 && !argumentPatternBox.Text.Contains(Emulator.ArgumentPatternFileVariable))
             {
-                GuiCommon.ShowMessageBox("The Argument Pattern does not contain " + Emulator.ArgumentPatternFileVariable + ".  It needs that or else the emulator will have no way of knowing what file you want to open.  If you don't know what to do, clear the box for a default value.");
+                MessageBoxes.ShowEmulatorArgumentPatternError();
                 e.Handled = true;
                 return;
             }
@@ -111,16 +111,12 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void argumentPatternHelpLink_Click(object sender, RoutedEventArgs e)
         {
-            GuiCommon.ShowMessageBox(
-                Emulator.ArgumentPatternFileVariable + " represents the file path.  Leave blank for the default value.\n\nMost programs require \"$(FilePath)\" (WITH quotes), but Project 64 requires \"$(FilePath)\" WITHOUT quotes.",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBoxes.ShowEmulatorArgumentPatternHelp();
         }
 
         private void platformsHelpLink_Click(object sender, RoutedEventArgs e)
         {
-            GuiCommon.ShowMessageBox(
-                "Select multiple platforms by control-clicking.",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBoxes.ShowEmulatorPlatformHelp();
         }
     }
 }

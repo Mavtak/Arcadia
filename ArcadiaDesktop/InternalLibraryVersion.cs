@@ -14,7 +14,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             get
             {
-                var date = "";
+                var date = "2012-11-18T18:26:24.1630859Z";
 
                 if (String.IsNullOrEmpty(date))
                 {

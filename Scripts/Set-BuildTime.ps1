@@ -1,7 +1,7 @@
 Param (
     [string]$filename = $(throw "filename is required")
 )
-exit
+
 [regex]$datetime_regex = 'var date = ".*";';
 
 Write-Host ("Parsing " + $filename)
