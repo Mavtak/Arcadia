@@ -49,6 +49,8 @@ namespace SomewhatGeeky.Arcadia.Desktop
                     updateChecker.CheckForUpdatesAsync();
                 }
 
+                GuiCommon.Load(this);
+
                 loadDataFile();
             }
             catch(Exception exc)
@@ -110,6 +112,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             changeWindowTitle("Saving");
+            GuiCommon.Save(this);
             library.WriteToFile(DataFilePath);
         }
 
