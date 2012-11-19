@@ -208,6 +208,7 @@
     <Compile Include="RepositoryListWindow.xaml.cs">
       <DependentUpon>RepositoryListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StandaloneGameLoader.cs" />
     <Compile Include="TextOutputWindow.xaml.cs">
       <DependentUpon>TextOutputWindow.xaml</DependentUpon>
     </Compile>

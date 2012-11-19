@@ -46,7 +46,7 @@ namespace SomewhatGeeky.Arcadia.Engine
 
         public IEnumerable<Platform> FindPlatformsByExtension(string extension)
         {
-            if (extension.StartsWith("."))
+            if (extension != null && extension.StartsWith("."))
             {
                 extension = extension.Substring(1);
             }

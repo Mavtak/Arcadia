@@ -85,7 +85,7 @@ namespace SomewhatGeeky.Arcadia.Engine.Items
                 return false;
             }
 
-            var result = UniqueFileExtensions.Any(extension => extensionToCheck.Equals(extension, StringComparison.InvariantCultureIgnoreCase));
+            var result = UniqueFileExtensions.Any(extension => String.Equals(extensionToCheck, extension, StringComparison.InvariantCultureIgnoreCase));
 
             return result;
         }

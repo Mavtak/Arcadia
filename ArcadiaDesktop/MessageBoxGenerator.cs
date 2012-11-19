@@ -32,6 +32,14 @@ namespace SomewhatGeeky.Arcadia.Desktop
             return ShowMessageBox(message, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        public static void ShowError(string message)
+        {
+            var options = MessageBoxButton.OK;
+            var icon = MessageBoxImage.Error;
+
+            ShowMessageBox(message, options, icon);
+        }
+
         public static void ShowCriticalErrorMessageBox(Exception exception)
         {
             var builder = new StringBuilder();

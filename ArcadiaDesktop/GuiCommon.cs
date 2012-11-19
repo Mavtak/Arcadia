@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Xml.Linq;
+using SomewhatGeeky.Arcadia.Engine.Items;
 
 namespace SomewhatGeeky.Arcadia.Desktop
 {
@@ -51,6 +52,14 @@ namespace SomewhatGeeky.Arcadia.Desktop
             }
         }
 
+        public static string LibraryFilePath
+        {
+            get
+            {
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Arcadia.xml");
+            }
+        }
+
         public static void Save(MainWindow window)
         {
             var root = new XElement(GuiSaveElementName);
@@ -78,6 +87,42 @@ namespace SomewhatGeeky.Arcadia.Desktop
             {
                 window.searchBox.Text = searchBoxNode.Value;
             }
+        }
+
+        public static void PlayGame(Window owner, Game game)
+        {
+            if (game == null)
+            {
+                return;
+            }
+
+            var library = game.ParentGameLibrary;
+
+            Emulator emulator = null;
+            var emulatorOptions = library.Emulators.GetEmulatorChoices(game.Platform).ToList();
+
+
+            if (emulatorOptions.Count == 1)
+            {
+                emulator = emulatorOptions[0];
+            }
+            else
+            {
+                if (emulatorOptions.Count == 0)
+                    emulatorOptions = library.Emulators.ToList();
+
+                var dialog = new EmulatorSelectorWindow(owner, library.Emulators, emulatorOptions);
+                dialog.ShowDialog();
+
+                emulator = dialog.Result;
+            }
+
+            if (emulator == null)
+            {
+                return;
+            }
+
+            emulator.OpenGame(game);
         }
     }
 }

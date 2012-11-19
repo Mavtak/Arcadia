@@ -23,7 +23,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ArcadiaLibrary library = new ArcadiaLibrary();
+        private ArcadiaLibrary library;
         private UpdaterClient updateChecker = new UpdaterClient(new string[] { "http://arcadia.SomewhatGeeky.com/update/", "http://arcadia.SomewhatGeeky.com/updates/", "http://update.SomewhatGeeky.com/", "http://updates.SomewhatGeeky.com/" }, "Arcadia Desktop", GuiCommon.Version, false);
 
         #region load and close code
@@ -37,6 +37,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             try
             {
+                library = new ArcadiaLibrary();
                 updateChecker.UpdateFound += new UpdatesFoundEventHandler(updateChecker_UpdateFound);
                 updateChecker.UpdateCheckFailed += new UpdateCheckFailedEventHandler(updateChecker_UpdateCheckFailed);
 
@@ -82,9 +83,9 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
             try
             {
-                if (System.IO.File.Exists(DataFilePath))
+                if (System.IO.File.Exists(GuiCommon.LibraryFilePath))
                 {
-                    library.ReadFromFile(DataFilePath);
+                    library.ReadFromFile(GuiCommon.LibraryFilePath);
                 }
                 else
                 {
@@ -109,18 +110,14 @@ namespace SomewhatGeeky.Arcadia.Desktop
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            changeWindowTitle("Saving");
-            GuiCommon.Save(this);
-            library.WriteToFile(DataFilePath);
-        }
-
-        private string DataFilePath
-        {
-            get
+            if (library != null)
             {
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Arcadia.xml");
+                changeWindowTitle("Saving");
+                GuiCommon.Save(this);
+                library.WriteToFile(GuiCommon.LibraryFilePath);
             }
         }
+
         #endregion
 
         #region update checker code
@@ -239,48 +236,14 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             if (e.Key == Key.Enter)
             {
-                playGame(SelectedGame);
+                GuiCommon.PlayGame(this, SelectedGame);
             }
         }     
         private void gameList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            playGame(SelectedGame);
+            GuiCommon.PlayGame(this, SelectedGame);
         }
         //TODO: make sure tablet pens work
-
-        private void playGame(Game game)
-        {
-            if (game == null)
-            {
-                return;
-            }
-
-            Emulator emulator = null;
-            var emulatorOptions = library.Emulators.GetEmulatorChoices(game.Platform).ToList();
-
-            
-            if (emulatorOptions.Count == 1)
-            {
-                emulator = emulatorOptions[0];
-            }
-            else
-            {
-                if (emulatorOptions.Count == 0)
-                    emulatorOptions = library.Emulators.ToList();
-
-                var dialog = new EmulatorSelectorWindow(this, library.Emulators, emulatorOptions);
-                dialog.ShowDialog();
-
-                emulator = dialog.Result;
-            }
-
-            if (emulator == null)
-            {
-                return;
-            }
-
-            emulator.OpenGame(game);
-        }
 
         private void produceDefaultSettingsMenuItem_Click(object sender, RoutedEventArgs e)
         {

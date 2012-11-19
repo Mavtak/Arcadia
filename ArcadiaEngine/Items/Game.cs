@@ -195,6 +195,7 @@ namespace SomewhatGeeky.Arcadia.Engine.Items
                 {
                     return Repository.RootPath + InnerPath;
                 }
+
                 return null;
             }
         }
@@ -203,8 +204,16 @@ namespace SomewhatGeeky.Arcadia.Engine.Items
             get
             {
                 string path = Path;
+
+                if (path == null)
+                {
+                    return null;
+                }
+
                 if (path.StartsWith(@"\\") || path.Substring(1, 1).Equals(":"))
+                {
                     return path;
+                }
 
                 return System.IO.Path.GetFullPath(path);
             }

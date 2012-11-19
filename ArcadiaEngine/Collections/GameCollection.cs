@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using SomewhatGeeky.Arcadia.Engine.Items;
+using System.IO;
+using System.Linq;
 
 namespace SomewhatGeeky.Arcadia.Engine
 {
@@ -32,6 +34,19 @@ namespace SomewhatGeeky.Arcadia.Engine
 
                 return base.Remove(item);
             }
+        }
+
+        public Game GetByPath(string path)
+        {
+            path = Path.GetFullPath(path);
+
+            var results = from game in this
+                          where game.FullPath.Equals(path, System.StringComparison.InvariantCultureIgnoreCase)
+                          select game;
+
+            var result = results.FirstOrDefault();
+
+            return result;
         }
 
         public bool ContainsPath(string path)
