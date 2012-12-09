@@ -179,6 +179,10 @@ namespace SomewhatGeeky.Arcadia.Desktop
            
             gameList.ItemsSource = library.Searcher.Search(searchBox.Text);
             changeWindowTitle("Displaying " + gameList.Items.Count);
+
+            playRandomFromLibraryMenuItem.IsEnabled = library.Games.Any();
+            playRandomFromSearchMenuItem.IsEnabled = gameList.Items.Count > 0;
+            playRandomMenuItem.IsEnabled = playRandomFromLibraryMenuItem.IsEnabled || playRandomFromSearchMenuItem.IsEnabled;
         }
 
         private void searchBox_KeyUp(object sender, KeyEventArgs e)
