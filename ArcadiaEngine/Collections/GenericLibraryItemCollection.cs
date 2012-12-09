@@ -130,6 +130,20 @@ namespace SomewhatGeeky.Arcadia.Engine
             items.Sort();
         }
 
+        public TItemType SelectRandom()
+        {
+            if (!this.Any())
+            {
+                return null;
+            }
+
+            var random = new Random();
+            var index = random.Next(0, Count);
+            var result = this[index];
+
+            return result;
+        }
+
         #region basic collection stuff
 
         public TItemType this[int index]

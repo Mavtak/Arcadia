@@ -433,6 +433,33 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             showAddRepositoriesSuggestion(false);
         }
-        
+
+        private void playRandomFromLibraryMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var game = library.Games.SelectRandom();
+
+            if (game == null)
+            {
+                MainWindowMessageBoxGenerator.ShowError("No ROM found");
+                return;
+            }
+
+            GuiCommon.PlayGame(this, game);
+        }
+
+        private void playRandomFromSearchMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (gameList.Items.Count == 0)
+            {
+                MainWindowMessageBoxGenerator.ShowError("No ROM found");
+                return;
+            }
+
+            var random = new Random();
+            var index = random.Next(0, gameList.Items.Count);
+            var game = gameList.Items[index] as Game;
+
+            GuiCommon.PlayGame(this, game);
+        }
     }
 }

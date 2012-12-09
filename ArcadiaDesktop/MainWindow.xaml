@@ -36,6 +36,10 @@
                     <MenuItem Header="Check Library" Name="checkLibraryMenuItem" Click="checkLibraryMenuItem_Click" /> 
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="Play Random..." Name="playRandomMenuItem">
+                <MenuItem Header="From Library" Name="playRandomFromLibraryMenuItem" Click="playRandomFromLibraryMenuItem_Click" />
+                <MenuItem Header="From Search" Name="playRandomFromSearchMenuItem" Click="playRandomFromSearchMenuItem_Click" />
+            </MenuItem>
             <MenuItem Header="About Arcadia" Name="aboutMenuItem" Click="aboutMenuItem_Click" />
         </Menu>
     </Grid>
