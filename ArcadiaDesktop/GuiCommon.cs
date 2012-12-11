@@ -89,40 +89,58 @@ namespace SomewhatGeeky.Arcadia.Desktop
             }
         }
 
-        public static void PlayGame(Window owner, Game game)
+        public static void PlayGame(Window owner, Game game, Func<string> getStatus = null, Action<string> setStatus = null)
         {
             if (game == null)
             {
                 return;
             }
 
-            var library = game.ParentGameLibrary;
+            string oldStatus = null;
 
-            Emulator emulator = null;
-            var emulatorOptions = library.Emulators.GetEmulatorChoices(game.Platform).ToList();
-
-
-            if (emulatorOptions.Count == 1)
+            if (getStatus != null && setStatus != null)
             {
-                emulator = emulatorOptions[0];
-            }
-            else
-            {
-                if (emulatorOptions.Count == 0)
-                    emulatorOptions = library.Emulators.ToList();
-
-                var dialog = new EmulatorSelectorWindow(owner, library.Emulators, emulatorOptions);
-                dialog.ShowDialog();
-
-                emulator = dialog.Result;
+                oldStatus = getStatus();
+                setStatus("starting " + game.Name);
             }
 
-            if (emulator == null)
+            try
             {
-                return;
-            }
+                var library = game.ParentGameLibrary;
 
-            emulator.OpenGame(game);
+                Emulator emulator = null;
+                var emulatorOptions = library.Emulators.GetEmulatorChoices(game.Platform).ToList();
+
+
+                if (emulatorOptions.Count == 1)
+                {
+                    emulator = emulatorOptions[0];
+                }
+                else
+                {
+                    if (emulatorOptions.Count == 0)
+                        emulatorOptions = library.Emulators.ToList();
+
+                    var dialog = new EmulatorSelectorWindow(owner, library.Emulators, emulatorOptions);
+                    dialog.ShowDialog();
+
+                    emulator = dialog.Result;
+                }
+
+                if (emulator == null)
+                {
+                    return;
+                }
+
+                emulator.OpenGame(game);
+            }
+            finally
+            {
+                if (setStatus != null && oldStatus != null)
+                {
+                    setStatus(oldStatus);
+                }
+            }
         }
     }
 }

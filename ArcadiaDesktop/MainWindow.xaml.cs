@@ -25,6 +25,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
     {
         private ArcadiaLibrary library;
         private UpdaterClient updateChecker = new UpdaterClient(new string[] { "http://arcadia.SomewhatGeeky.com/update/", "http://arcadia.SomewhatGeeky.com/updates/", "http://update.SomewhatGeeky.com/", "http://updates.SomewhatGeeky.com/" }, "Arcadia Desktop", GuiCommon.Version, false);
+        private string windowTitle;
 
         #region load and close code
         public MainWindow()
@@ -240,12 +241,12 @@ namespace SomewhatGeeky.Arcadia.Desktop
         {
             if (e.Key == Key.Enter)
             {
-                GuiCommon.PlayGame(this, SelectedGame);
+                playGame(SelectedGame);
             }
         }     
         private void gameList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            GuiCommon.PlayGame(this, SelectedGame);
+            playGame(SelectedGame);
         }
         //TODO: make sure tablet pens work
 
@@ -380,6 +381,8 @@ namespace SomewhatGeeky.Arcadia.Desktop
                 return;
             }
 
+            windowTitle = text;
+
             var builder = new StringBuilder();
 
             builder.Append(GuiCommon.MainWindowBaseTitle);
@@ -448,7 +451,7 @@ namespace SomewhatGeeky.Arcadia.Desktop
                 return;
             }
 
-            GuiCommon.PlayGame(this, game);
+            playGame(game);
         }
 
         private void playRandomFromSearchMenuItem_Click(object sender, RoutedEventArgs e)
@@ -463,7 +466,18 @@ namespace SomewhatGeeky.Arcadia.Desktop
             var index = random.Next(0, gameList.Items.Count);
             var game = gameList.Items[index] as Game;
 
-            GuiCommon.PlayGame(this, game);
+            playGame(game);
+        }
+
+        private void playGame(Game game)
+        {
+            Func<string> getStatus = () =>
+                this.windowTitle;
+            
+            Action<string> setStatus = (text) =>
+                this.changeWindowTitle(text);
+
+            GuiCommon.PlayGame(this, game, getStatus, setStatus);
         }
     }
 }
